@@ -137,7 +137,7 @@ function selfDoctor() {
   const checks = [
     ["package name", pkg.name === "noyap"],
     ["version", Boolean(pkg.version)],
-    ["bin.noyap", pkg.bin?.noyap === "./bin/noyap.js"],
+    ["bin.noyap", pkg.bin?.noyap === "bin/noyap.js" || pkg.bin?.noyap === "./bin/noyap.js"],
     ["repository", pkg.repository?.url?.includes("github.com/ppwnr88/noyap")],
     ["license", pkg.license === "MIT"]
   ];

@@ -22,7 +22,7 @@
     "url": "https://github.com/ppwnr88/noyap/issues"
   },
   "bin": {
-    "noyap": "./bin/noyap.js"
+    "noyap": "bin/noyap.js"
   },
   "files": [
     "bin",
