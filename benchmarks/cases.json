@@ -1,0 +1,316 @@
+[
+  {
+    "id": "en-react-usememo",
+    "category": "English coding questions",
+    "language": "en",
+    "prompt": "Why does this React child keep re-rendering when I pass an options object?",
+    "baseline": "Certainly! The child is probably re-rendering because the options object is being recreated on every parent render.\nReact compares props by reference, so even if the object has the same values, it is still a new reference each time.\nYou should memoize the object with useMemo, or move it outside the component if it does not depend on props or state.",
+    "responses": {
+      "minimal": "Object recreated every render. Wrap `options` with `useMemo`.",
+      "balanced": "Object recreated every render. React compares props by reference. Wrap `options` with `useMemo`.",
+      "senior": "New object reference each render. Memoize `options` with `useMemo`, or hoist it if static.",
+      "thai-dev": "Object ถูกสร้างใหม่ทุก render. React compare prop ด้วย reference. ใช้ `useMemo`.",
+      "hardcore": "New object ref -> re-render. `useMemo`.",
+      "bilingual": "Object/function recreated every render. Check `useMemo`/`useCallback`.",
+      "hardcore-th": "Object/function ใหม่ทุก render. เช็ค `useMemo`/`useCallback`."
+    },
+    "requiredTerms": [
+      "object",
+      "render",
+      "reference",
+      "useMemo"
+    ],
+    "warningTerms": [],
+    "minMeaningScore": 0.75,
+    "minTokens": 5
+  },
+  {
+    "id": "th-api-auth-header",
+    "category": "Thai coding questions",
+    "language": "th",
+    "prompt": "API ยิงแล้วได้ 401 ทั้งที่ login แล้ว น่าจะเช็คตรงไหน",
+    "baseline": "ปัญหานี้น่าจะเกิดจาก request ที่ส่งไปยัง API ไม่มี Authorization header หรือ token หมดอายุแล้วครับ\nลองตรวจสอบก่อนว่า frontend แนบ Bearer token ไปกับทุก request หรือไม่ และ backend อ่าน header จากตำแหน่งที่ถูกต้องหรือเปล่า\nถ้า token หมดอายุควร refresh token หรือให้ user login ใหม่",
+    "responses": {
+      "minimal": "`Authorization` header หาย หรือ token หมดอายุ. เช็ค Bearer token ก่อน.",
+      "balanced": "น่าจะขาด `Authorization` header หรือ token หมดอายุ. เช็คว่า frontend ส่ง Bearer token และ backend อ่าน header ถูก.",
+      "senior": "เริ่มที่ `Authorization` header. ถ้ามีแล้วเช็ค token expiry, clock skew, และ backend middleware อ่าน Bearer token ถูกไหม.",
+      "thai-dev": "น่าจะขาด `Authorization` header หรือ token expired. เช็คว่า frontend แนบ Bearer token ทุก request และ backend อ่าน header ถูก.",
+      "hardcore": "401: header หาย/token expired. เช็ค Bearer.",
+      "bilingual": "น่าจะขาด `Authorization` header หรือ token expired. เช็ค Bearer token ทั้ง frontend/backend.",
+      "hardcore-th": "401: header หาย/token หมด. เช็ค Bearer."
+    },
+    "requiredTerms": [
+      "Authorization",
+      "header",
+      "token",
+      "Bearer"
+    ],
+    "warningTerms": [],
+    "minMeaningScore": 0.75,
+    "minTokens": 6
+  },
+  {
+    "id": "mixed-next-cache",
+    "category": "Mixed Thai/English developer questions",
+    "language": "mixed",
+    "prompt": "Next.js page cache ไม่ update หลัง deploy ต้องแก้ยังไง",
+    "baseline": "ปัญหานี้อาจเกิดจาก cache ของ Next.js หรือ CDN ยังถือ response เก่าอยู่หลัง deploy ครับ\nคุณควรตรวจสอบ revalidate setting, cache-control header, และถ้าใช้ ISR ให้แน่ใจว่ามีการกำหนด revalidate หรือเรียก revalidatePath/revalidateTag ถูกต้อง\nนอกจากนี้อาจต้อง purge CDN cache หลัง deploy ด้วย",
+    "responses": {
+      "minimal": "Cache ยัง serve ของเก่า. เช็ค `revalidate`, `cache-control`, แล้ว purge CDN.",
+      "balanced": "น่าจะ cache ค้าง. เช็ค `revalidate`, `cache-control`, ISR, และ purge CDN หลัง deploy.",
+      "senior": "แยก source ก่อน: Next cache, ISR, หรือ CDN. เช็ค `revalidate`, `cache-control`, `revalidatePath`/`revalidateTag`, แล้ว purge CDN ถ้าจำเป็น.",
+      "thai-dev": "น่าจะ cache ค้างหลัง deploy. เช็ค `revalidate`, `cache-control`, ISR config, แล้ว purge CDN ถ้าใช้ CDN.",
+      "hardcore": "Cache ค้าง. `revalidate`/headers/CDN purge.",
+      "bilingual": "น่าจะ cache ค้างหลัง deploy. เช็ค `revalidate`, `cache-control`, ISR, CDN purge.",
+      "hardcore-th": "Cache ค้างหลัง deploy. เช็ค `revalidate`/CDN purge."
+    },
+    "requiredTerms": [
+      "cache",
+      "revalidate",
+      "cache-control",
+      "CDN"
+    ],
+    "warningTerms": [],
+    "minMeaningScore": 0.75,
+    "minTokens": 5
+  },
+  {
+    "id": "debug-node-env",
+    "category": "Debugging tasks",
+    "language": "en",
+    "prompt": "My Node app works locally but crashes in Docker with 'Cannot find module dotenv'.",
+    "baseline": "This usually happens because dotenv is installed as a devDependency but your Docker image installs only production dependencies with npm ci --omit=dev or NODE_ENV=production.\nMove dotenv to dependencies if the app imports it at runtime, or remove the runtime import and load environment variables another way in production.\nThen rebuild the Docker image without using the old cache.",
+    "responses": {
+      "minimal": "`dotenv` likely in `devDependencies`. Move to `dependencies` or stop importing it at runtime.",
+      "balanced": "`dotenv` is likely omitted in Docker production install. Move it to `dependencies`, or remove runtime import and inject env another way. Rebuild image.",
+      "senior": "Docker likely runs `npm ci --omit=dev`, so `dotenv` from `devDependencies` is missing. If imported at runtime, move it to `dependencies`; otherwise load env outside the app. Rebuild without stale cache.",
+      "thai-dev": "`dotenv` น่าจะอยู่ใน `devDependencies` แล้ว Docker install แบบ production. ย้ายไป `dependencies` หรือเลิก import runtime แล้ว rebuild image.",
+      "hardcore": "Docker omits `devDependencies`. Move `dotenv` to `dependencies` or remove import. Rebuild.",
+      "bilingual": "`dotenv` น่าจะอยู่ใน `devDependencies`; Docker production install เลยหาไม่เจอ. ย้ายไป `dependencies` หรือเลิก runtime import.",
+      "hardcore-th": "Docker omit `devDependencies`. ย้าย `dotenv` ไป `dependencies` หรือเลิก import."
+    },
+    "requiredTerms": [
+      "dotenv",
+      "devDependencies",
+      "dependencies",
+      "Docker"
+    ],
+    "warningTerms": [],
+    "minMeaningScore": 0.75,
+    "minTokens": 6
+  },
+  {
+    "id": "arch-monolith-services",
+    "category": "Architecture questions",
+    "language": "en",
+    "prompt": "Should we split this monolith into microservices?",
+    "baseline": "It depends on the actual bottleneck.\nMicroservices can help when teams need independent deployments, clear service ownership, and isolated scaling, but they add operational complexity, distributed tracing needs, network failure modes, and data consistency problems.\nIf the current problem is messy modules, start by modularizing the monolith and defining boundaries before extracting services.",
+    "responses": {
+      "minimal": "Not first. Modularize monolith, define boundaries, split only where deployment/scaling ownership needs it.",
+      "balanced": "Do not split just for cleanliness. First modularize the monolith. Extract services only when independent deploys, ownership, or scaling justify the ops cost.",
+      "senior": "Microservices buy independent deploys, ownership, and scaling. Cost: ops, tracing, network failures, data consistency. Start with a modular monolith, then extract stable boundaries.",
+      "thai-dev": "อย่าแยกเพราะ code รกอย่างเดียว. ทำ modular monolith ก่อน. ค่อย split service เมื่อจำเป็นเรื่อง deploy, ownership, scaling/scale. Ops cost สูง.",
+      "hardcore": "Modularize first. Split only for deploy/scale/ownership. Ops cost high.",
+      "bilingual": "ทำ modular monolith ก่อน. ค่อย split service เมื่อ independent deploy, ownership, หรือ scale คุ้ม ops cost.",
+      "hardcore-th": "Modular ก่อน. Split เฉพาะ deploy/scale/ownership. Ops cost สูง."
+    },
+    "requiredTerms": [
+      "modular",
+      "deploy",
+      "scaling",
+      "ops"
+    ],
+    "warningTerms": [],
+    "minMeaningScore": 0.75,
+    "minTokens": 8
+  },
+  {
+    "id": "security-jwt-localstorage",
+    "category": "Security warning cases",
+    "language": "en",
+    "prompt": "Can I store JWT access tokens in localStorage?",
+    "baseline": "You can store JWTs in localStorage, but it carries a security risk because any successful XSS attack can read the token and exfiltrate it.\nFor sensitive applications, prefer secure, HttpOnly, SameSite cookies and pair them with CSRF protection where needed.\nIf you still use localStorage, keep token lifetime short, harden against XSS, and never store long-lived refresh tokens there.",
+    "responses": {
+      "minimal": "Risky. XSS can steal localStorage tokens. Prefer `HttpOnly` `SameSite` cookies. Never store long-lived refresh tokens there.",
+      "balanced": "Avoid localStorage for sensitive JWTs. XSS can steal token data. Prefer `HttpOnly`, `Secure`, `SameSite` cookies plus CSRF protection. Never store refresh token there.",
+      "senior": "localStorage is acceptable only for low-risk apps. Main risk: XSS steals tokens. Prefer `HttpOnly`/`Secure`/`SameSite` cookies; add CSRF protection if cookie auth needs it. Do not store refresh tokens in localStorage.",
+      "thai-dev": "ไม่แนะนำสำหรับ app sensitive. XSS steal token จาก localStorage ได้. ใช้ `HttpOnly`, `Secure`, `SameSite` cookie และ CSRF protection. อย่าเก็บ refresh token ยาวๆ ใน localStorage.",
+      "hardcore": "Risk: XSS steals token. Prefer `HttpOnly` cookies. No long-lived refresh tokens in localStorage.",
+      "bilingual": "ไม่แนะนำสำหรับ sensitive app. XSS steal token จาก localStorage ได้. ใช้ `HttpOnly`/`Secure`/`SameSite`; อย่าเก็บ refresh token.",
+      "hardcore-th": "Risk: XSS steal token. ใช้ `HttpOnly` cookie. ห้าม long-lived refresh token."
+    },
+    "requiredTerms": [
+      "localStorage",
+      "XSS",
+      "token",
+      "HttpOnly"
+    ],
+    "warningTerms": [
+      "XSS",
+      "steal",
+      "refresh token"
+    ],
+    "minMeaningScore": 0.75,
+    "minTokens": 8
+  },
+  {
+    "id": "data-loss-prisma-reset",
+    "category": "Data-loss warning cases",
+    "language": "mixed",
+    "prompt": "ใช้ prisma migrate reset บน production ได้ไหม",
+    "baseline": "ไม่ควรใช้ prisma migrate reset บน production ครับ\nคำสั่งนี้จะ drop database/schema แล้วสร้างใหม่ ทำให้ข้อมูลหายได้ เหมาะกับ local development เท่านั้น\nถ้า production schema มีปัญหาให้สร้าง migration ใหม่ ตรวจ backup ก่อน และทดสอบบน staging ก่อนรันจริง",
+    "responses": {
+      "minimal": "ห้ามใช้บน production. `prisma migrate reset` drop DB/schema. Data loss/ข้อมูลหาย. ใช้ migration ใหม่ + backup.",
+      "balanced": "อย่าใช้ `prisma migrate reset` บน production. มัน drop DB/schema แล้วทำให้ข้อมูลหาย/Data loss. ทำ migration ใหม่, เช็ค backup, ทดสอบ staging ก่อน.",
+      "senior": "Production ห้ามใช้ `prisma migrate reset` เว้นแต่ตั้งใจล้างข้อมูล. มัน drop schema/DB: Data loss/ข้อมูลหาย. ทำ forward migration, verify backup, dry-run/staging ก่อนรัน.",
+      "thai-dev": "ไม่ควรใช้บน production. `prisma migrate reset` จะ drop DB/schema แล้วข้อมูลหาย/Data loss. ทำ migration ใหม่, เช็ค backup, test บน staging ก่อน.",
+      "hardcore": "Production: no. `prisma migrate reset` drop DB/schema. Data loss/ข้อมูลหาย. เช็ค backup.",
+      "bilingual": "อย่าใช้บน production. `prisma migrate reset` drop DB/schema = Data loss/ข้อมูลหาย. ทำ migration ใหม่ + backup + staging.",
+      "hardcore-th": "Production: no. Drop DB/schema. Data loss/ข้อมูลหาย. เช็ค backup."
+    },
+    "requiredTerms": [
+      "prisma migrate reset",
+      "production",
+      "drop",
+      "backup"
+    ],
+    "warningTerms": [
+      "drop",
+      "ข้อมูลหาย",
+      "Data loss"
+    ],
+    "minMeaningScore": 0.75,
+    "minTokens": 8
+  },
+  {
+    "id": "th-stacktrace-typeerror",
+    "category": "Thai with English stack traces",
+    "language": "mixed",
+    "prompt": "deploy แล้วเจอ error นี้คืออะไร\n\nTypeError: Cannot read properties of undefined (reading 'map')\n    at render (/app/page.js:10:3)",
+    "baseline": "จาก stack trace นี้ ปัญหาน่าจะเกิดจากตัวแปรที่คุณเรียก .map เป็น undefined ตอน render ครับ\nให้เช็ค data ก่อน render หรือใส่ default value เป็น array เช่น items ?? []\nอย่าแก้ด้วยการ catch error ทิ้ง เพราะจะซ่อน bug จริง",
+    "responses": {
+      "minimal": "`map` ถูกเรียกบน `undefined`. ใส่ default array หรือ guard ก่อน render. อย่า catch ทิ้ง.",
+      "balanced": "`TypeError` บอกว่า `.map` เจอ `undefined`. เช็ค data ก่อน render หรือใช้ `items ?? []`. อย่า catch error ทิ้ง.",
+      "senior": "Cause: data ยังเป็น `undefined` ตอน render แล้วเรียก `.map`. Fix ด้วย default `[]`, loading state, หรือ schema guard. อย่า catch ทิ้งเพราะจะซ่อน bug.",
+      "thai-dev": "น่าจะ data ยัง `undefined` ตอน render แล้วเรียก `.map`. ใส่ default `[]` หรือ guard/loading state. อย่า catch ทิ้ง.",
+      "bilingual": "`map` เจอ `undefined` ตอน render. ใช้ default `[]`/guard. อย่า catch ทิ้ง; keep raw stack trace ไว้ debug.",
+      "hardcore": "`.map` on undefined. Guard/default `[]`. อย่า catch ทิ้ง.",
+      "hardcore-th": "`.map` เจอ undefined. guard/default `[]`. อย่า catch."
+    },
+    "requiredTerms": [
+      "map",
+      "undefined",
+      "render",
+      "default"
+    ],
+    "warningTerms": [
+      "อย่า",
+      "catch"
+    ],
+    "minMeaningScore": 0.75,
+    "minTokens": 7
+  },
+  {
+    "id": "th-cli-npm-error",
+    "category": "Thai with CLI output",
+    "language": "mixed",
+    "prompt": "npm install แล้ว error แบบนี้\n\nnpm ERR! ERESOLVE unable to resolve dependency tree\nnpm ERR! peer react@\"^18\" from @mui/material",
+    "baseline": "error นี้เกิดจาก dependency peer version ไม่ตรงกันครับ package บางตัวต้องการ React 18 แต่ project อาจใช้ version อื่นอยู่\nให้เช็ค React version, MUI version, และ lockfile ก่อน\nหลีกเลี่ยง --force ถ้ายังไม่เข้าใจ conflict เพราะอาจทำให้ runtime พังทีหลัง",
+    "responses": {
+      "minimal": "Peer dependency ชนกัน. เช็ค React/MUI version กับ lockfile. `--force` เสี่ยง/runtime risk.",
+      "balanced": "`ERESOLVE` คือ peer dependency conflict. เช็ค React/MUI version และ lockfile. อย่าใช้ `--force`; runtime risk.",
+      "senior": "Cause: peer dependency mismatch ระหว่าง React กับ MUI. Align versions ก่อน, regenerate lockfile ถ้าจำเป็น. `--force` มี runtime risk.",
+      "thai-dev": "React/MUI peer dependency ชนกัน. เช็ค version กับ lockfile. อย่า `--force`; runtime risk/break ได้.",
+      "bilingual": "`ERESOLVE` = peer dependency conflict. Align React/MUI versions, เช็ค lockfile. Avoid `--force` unless you accept runtime risk.",
+      "hardcore": "Peer deps ชน. Align React/MUI. `--force` risky.",
+      "hardcore-th": "Peer deps ชน. Align React/MUI. `--force` risk."
+    },
+    "requiredTerms": [
+      "peer",
+      "React",
+      "MUI",
+      "version"
+    ],
+    "warningTerms": [
+      "force",
+      "risk"
+    ],
+    "minMeaningScore": 0.75,
+    "minTokens": 8
+  },
+  {
+    "id": "th-debug-rerender",
+    "category": "Thai debugging prompts",
+    "language": "mixed",
+    "prompt": "component rerender ตลอด เกิดจากอะไร",
+    "baseline": "อาการ component rerender ตลอดมักเกิดจาก props หรือ state ที่เปลี่ยน reference ทุก render เช่น object, array, หรือ function ที่สร้าง inline\nให้เริ่มเช็ค useMemo/useCallback, dependency array, และ parent component ที่ส่ง props ลงมา\nถ้ามี state update ใน effect ต้องระวัง infinite loop ด้วย",
+    "responses": {
+      "minimal": "น่าจะมี object/function ถูกสร้างใหม่ทุก render. เช็ค `useMemo`/`useCallback`.",
+      "balanced": "น่าจะมี object/function/array ถูกสร้างใหม่ทุก render. เช็ค `useMemo`, `useCallback`, dependency array, และ parent props.",
+      "senior": "เริ่มจาก reference churn: object/array/function inline. เช็ค parent props, `useMemo`/`useCallback`, dependency array. ถ้ามี setState ใน effect ระวัง loop.",
+      "thai-dev": "น่าจะ reference เปลี่ยนทุก render: object/array/function inline. เช็ค `useMemo`/`useCallback`, deps, parent props.",
+      "bilingual": "น่าจะ reference churn. object/function ใหม่ทุก render. เช็ค `useMemo`/`useCallback`, deps, parent props.",
+      "hardcore": "Object/function ref ใหม่ทุก render. ใช้ `useMemo`/`useCallback`.",
+      "hardcore-th": "Ref ใหม่ทุก render. memo object/function."
+    },
+    "requiredTerms": [
+      "render",
+      "object",
+      "function",
+      "useMemo"
+    ],
+    "warningTerms": [],
+    "minMeaningScore": 0.75,
+    "minTokens": 6
+  },
+  {
+    "id": "th-devops-docker-slow",
+    "category": "Thai DevOps prompts",
+    "language": "mixed",
+    "prompt": "Docker build ช้ามาก",
+    "baseline": "Docker build ช้ามักเกิดจาก layer cache miss หรือ Dockerfile เรียง COPY ไม่ดีครับ\nควร copy package.json และ lockfile ก่อน npm install แล้วค่อย copy source code ทีหลัง\nเช็ค .dockerignore ด้วย ไม่งั้น node_modules, dist, หรือไฟล์ใหญ่ๆ อาจถูกส่งเข้า build context",
+    "responses": {
+      "minimal": "Layer cache น่าจะ miss. เช็ค `COPY` order กับ `.dockerignore`.",
+      "balanced": "น่าจะ layer cache miss. แยก `COPY package*.json` ก่อน install แล้วค่อย `COPY` source. เช็ค `.dockerignore` ด้วย.",
+      "senior": "Optimize cache layers: copy manifest/lockfile ก่อน install, copy source ทีหลัง. ลด build context ด้วย `.dockerignore`; อย่าส่ง `node_modules`/`dist` เข้า Docker.",
+      "thai-dev": "Layer cache น่าจะ miss. จัด `COPY` order ใหม่: package/lockfile ก่อน install, source ทีหลัง. เช็ค `.dockerignore`.",
+      "bilingual": "Docker layer cache น่าจะ miss. แก้ `COPY` order, package/lockfile ก่อน install, เช็ค `.dockerignore`.",
+      "hardcore": "Layer cache miss. แก้ `COPY` order + `.dockerignore`.",
+      "hardcore-th": "Layer cache miss. แก้ `COPY` order + `.dockerignore`."
+    },
+    "requiredTerms": [
+      "Docker",
+      "cache",
+      "COPY",
+      ".dockerignore"
+    ],
+    "warningTerms": [],
+    "minMeaningScore": 0.75,
+    "minTokens": 6
+  },
+  {
+    "id": "th-sql-latest-include",
+    "category": "Thai SQL prompts",
+    "language": "mixed",
+    "prompt": "sequelize include ดึง latest row ยังไง",
+    "baseline": "ถ้าใช้ Sequelize include ปกติ มันไม่ได้ guarantee ว่าจะได้ latest row ของ relation ครับ\nสำหรับ hasMany ถ้าต้องการ record ล่าสุด ให้ใช้ separate: true พร้อม limit: 1 และ order ตาม createdAt หรือ id DESC\nถ้าต้อง optimize มากขึ้น อาจต้องใช้ subquery/window function หรือ raw SQL",
+    "responses": {
+      "minimal": "`include` ไม่ guarantee latest row. ใช้ `separate` + `limit`/`order`.",
+      "balanced": "`include` ปกติไม่ guarantee latest row. สำหรับ hasMany ใช้ `separate: true`, `limit: 1`, `order: [[createdAt, DESC]]`.",
+      "senior": "Sequelize `include` ไม่เหมาะกับ latest child แบบ guarantee. ใช้ `separate: true` + `limit/order`; ถ้า performance สำคัญ ใช้ subquery/window function/raw SQL.",
+      "thai-dev": "`include` ไม่ guarantee latest row. ใช้ `separate: true` + `limit: 1` + `order DESC`. ถ้า query หนัก ใช้ raw SQL/window function.",
+      "bilingual": "`include` ไม่ guarantee latest row. ใช้ `separate + limit/order`; performance-sensitive ให้ใช้ subquery/window function.",
+      "hardcore": "`include` ไม่ latest. ใช้ `separate` + `limit/order`.",
+      "hardcore-th": "`include` ไม่ guarantee latest. ใช้ `separate` + `limit/order`."
+    },
+    "requiredTerms": [
+      "include",
+      "latest",
+      "separate",
+      "order"
+    ],
+    "warningTerms": [],
+    "minMeaningScore": 0.75,
+    "minTokens": 6
+  }
+]

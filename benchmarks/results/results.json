@@ -1,0 +1,3996 @@
+{
+  "generatedAt": "2026-05-09T15:26:43.901Z",
+  "tokenizer": "gpt-tokenizer",
+  "caseCount": 12,
+  "modes": [
+    "minimal",
+    "balanced",
+    "senior",
+    "thai-dev",
+    "bilingual",
+    "hardcore",
+    "hardcore-th"
+  ],
+  "summary": [
+    {
+      "mode": "minimal",
+      "tokenReduction": 67.53,
+      "characterReduction": 70.96,
+      "lineReduction": 66.67,
+      "meaningPreserved": 93.75,
+      "warningPreserved": 100,
+      "thaiQuality": 100,
+      "englishQuality": 100,
+      "flaggedCases": 0
+    },
+    {
+      "mode": "balanced",
+      "tokenReduction": 54.12,
+      "characterReduction": 58.23,
+      "lineReduction": 66.67,
+      "meaningPreserved": 95.83,
+      "warningPreserved": 100,
+      "thaiQuality": 100,
+      "englishQuality": 100,
+      "flaggedCases": 0
+    },
+    {
+      "mode": "senior",
+      "tokenReduction": 43.28,
+      "characterReduction": 47.12,
+      "lineReduction": 66.67,
+      "meaningPreserved": 97.92,
+      "warningPreserved": 100,
+      "thaiQuality": 100,
+      "englishQuality": 100,
+      "flaggedCases": 0
+    },
+    {
+      "mode": "thai-dev",
+      "tokenReduction": 52.07,
+      "characterReduction": 58.12,
+      "lineReduction": 66.67,
+      "meaningPreserved": 100,
+      "warningPreserved": 100,
+      "thaiQuality": 100,
+      "englishQuality": 100,
+      "flaggedCases": 0
+    },
+    {
+      "mode": "bilingual",
+      "tokenReduction": 59.5,
+      "characterReduction": 63.35,
+      "lineReduction": 66.67,
+      "meaningPreserved": 95.83,
+      "warningPreserved": 100,
+      "thaiQuality": 100,
+      "englishQuality": 100,
+      "flaggedCases": 0
+    },
+    {
+      "mode": "hardcore",
+      "tokenReduction": 74.83,
+      "characterReduction": 79.16,
+      "lineReduction": 66.67,
+      "meaningPreserved": 87.5,
+      "warningPreserved": 100,
+      "thaiQuality": 100,
+      "englishQuality": 100,
+      "flaggedCases": 0
+    },
+    {
+      "mode": "hardcore-th",
+      "tokenReduction": 75.96,
+      "characterReduction": 80.68,
+      "lineReduction": 66.67,
+      "meaningPreserved": 81.25,
+      "warningPreserved": 100,
+      "thaiQuality": 100,
+      "englishQuality": 100,
+      "flaggedCases": 0
+    }
+  ],
+  "results": [
+    {
+      "id": "en-react-usememo",
+      "category": "English coding questions",
+      "language": "en",
+      "mode": "minimal",
+      "baseline": {
+        "tokens": 72,
+        "characters": 350,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 14,
+        "characters": 61,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 80.56,
+        "characters": 82.57,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 0.75,
+        "matched": [
+          "object",
+          "render",
+          "useMemo"
+        ],
+        "missing": [
+          "reference"
+        ]
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "en-react-usememo",
+      "category": "English coding questions",
+      "language": "en",
+      "mode": "balanced",
+      "baseline": {
+        "tokens": 72,
+        "characters": 350,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 20,
+        "characters": 96,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 72.22,
+        "characters": 72.57,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "object",
+          "render",
+          "reference",
+          "useMemo"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "en-react-usememo",
+      "category": "English coding questions",
+      "language": "en",
+      "mode": "senior",
+      "baseline": {
+        "tokens": 72,
+        "characters": 350,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 23,
+        "characters": 90,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 68.06,
+        "characters": 74.29,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "object",
+          "render",
+          "reference",
+          "useMemo"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "en-react-usememo",
+      "category": "English coding questions",
+      "language": "en",
+      "mode": "thai-dev",
+      "baseline": {
+        "tokens": 72,
+        "characters": 350,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 19,
+        "characters": 80,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 73.61,
+        "characters": 77.14,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "object",
+          "render",
+          "reference",
+          "useMemo"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "en-react-usememo",
+      "category": "English coding questions",
+      "language": "en",
+      "mode": "bilingual",
+      "baseline": {
+        "tokens": 72,
+        "characters": 350,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 16,
+        "characters": 70,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 77.78,
+        "characters": 80,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 0.75,
+        "matched": [
+          "object",
+          "render",
+          "useMemo"
+        ],
+        "missing": [
+          "reference"
+        ]
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "en-react-usememo",
+      "category": "English coding questions",
+      "language": "en",
+      "mode": "hardcore",
+      "baseline": {
+        "tokens": 72,
+        "characters": 350,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 11,
+        "characters": 39,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 84.72,
+        "characters": 88.86,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 0.75,
+        "matched": [
+          "object",
+          "render",
+          "useMemo"
+        ],
+        "missing": [
+          "reference"
+        ]
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "en-react-usememo",
+      "category": "English coding questions",
+      "language": "en",
+      "mode": "hardcore-th",
+      "baseline": {
+        "tokens": 72,
+        "characters": 350,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 17,
+        "characters": 61,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 76.39,
+        "characters": 82.57,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 0.75,
+        "matched": [
+          "object",
+          "render",
+          "useMemo"
+        ],
+        "missing": [
+          "reference"
+        ]
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "th-api-auth-header",
+      "category": "Thai coding questions",
+      "language": "th",
+      "mode": "minimal",
+      "baseline": {
+        "tokens": 78,
+        "characters": 280,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 20,
+        "characters": 70,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 74.36,
+        "characters": 75,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "Authorization",
+          "header",
+          "token",
+          "Bearer"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "th-api-auth-header",
+      "category": "Thai coding questions",
+      "language": "th",
+      "mode": "balanced",
+      "baseline": {
+        "tokens": 78,
+        "characters": 280,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 30,
+        "characters": 114,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 61.54,
+        "characters": 59.29,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "Authorization",
+          "header",
+          "token",
+          "Bearer"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "th-api-auth-header",
+      "category": "Thai coding questions",
+      "language": "th",
+      "mode": "senior",
+      "baseline": {
+        "tokens": 78,
+        "characters": 280,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 30,
+        "characters": 121,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 61.54,
+        "characters": 56.79,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "Authorization",
+          "header",
+          "token",
+          "Bearer"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "th-api-auth-header",
+      "category": "Thai coding questions",
+      "language": "th",
+      "mode": "thai-dev",
+      "baseline": {
+        "tokens": 78,
+        "characters": 280,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 30,
+        "characters": 126,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 61.54,
+        "characters": 55,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "Authorization",
+          "header",
+          "token",
+          "Bearer"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "th-api-auth-header",
+      "category": "Thai coding questions",
+      "language": "th",
+      "mode": "bilingual",
+      "baseline": {
+        "tokens": 78,
+        "characters": 280,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 22,
+        "characters": 92,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 71.79,
+        "characters": 67.14,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "Authorization",
+          "header",
+          "token",
+          "Bearer"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "th-api-auth-header",
+      "category": "Thai coding questions",
+      "language": "th",
+      "mode": "hardcore",
+      "baseline": {
+        "tokens": 78,
+        "characters": 280,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 13,
+        "characters": 43,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 83.33,
+        "characters": 84.64,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 0.75,
+        "matched": [
+          "header",
+          "token",
+          "Bearer"
+        ],
+        "missing": [
+          "Authorization"
+        ]
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "th-api-auth-header",
+      "category": "Thai coding questions",
+      "language": "th",
+      "mode": "hardcore-th",
+      "baseline": {
+        "tokens": 78,
+        "characters": 280,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 14,
+        "characters": 39,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 82.05,
+        "characters": 86.07,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 0.75,
+        "matched": [
+          "header",
+          "token",
+          "Bearer"
+        ],
+        "missing": [
+          "Authorization"
+        ]
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "mixed-next-cache",
+      "category": "Mixed Thai/English developer questions",
+      "language": "mixed",
+      "mode": "minimal",
+      "baseline": {
+        "tokens": 80,
+        "characters": 286,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 21,
+        "characters": 76,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 73.75,
+        "characters": 73.43,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "cache",
+          "revalidate",
+          "cache-control",
+          "CDN"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "mixed-next-cache",
+      "category": "Mixed Thai/English developer questions",
+      "language": "mixed",
+      "mode": "balanced",
+      "baseline": {
+        "tokens": 80,
+        "characters": 286,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 25,
+        "characters": 85,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 68.75,
+        "characters": 70.28,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "cache",
+          "revalidate",
+          "cache-control",
+          "CDN"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "mixed-next-cache",
+      "category": "Mixed Thai/English developer questions",
+      "language": "mixed",
+      "mode": "senior",
+      "baseline": {
+        "tokens": 80,
+        "characters": 286,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 44,
+        "characters": 139,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 45,
+        "characters": 51.4,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "cache",
+          "revalidate",
+          "cache-control",
+          "CDN"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "mixed-next-cache",
+      "category": "Mixed Thai/English developer questions",
+      "language": "mixed",
+      "mode": "thai-dev",
+      "baseline": {
+        "tokens": 80,
+        "characters": 286,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 30,
+        "characters": 103,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 62.5,
+        "characters": 63.99,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "cache",
+          "revalidate",
+          "cache-control",
+          "CDN"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "mixed-next-cache",
+      "category": "Mixed Thai/English developer questions",
+      "language": "mixed",
+      "mode": "bilingual",
+      "baseline": {
+        "tokens": 80,
+        "characters": 286,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 24,
+        "characters": 80,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 70,
+        "characters": 72.03,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "cache",
+          "revalidate",
+          "cache-control",
+          "CDN"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "mixed-next-cache",
+      "category": "Mixed Thai/English developer questions",
+      "language": "mixed",
+      "mode": "hardcore",
+      "baseline": {
+        "tokens": 80,
+        "characters": 286,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 14,
+        "characters": 43,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 82.5,
+        "characters": 84.97,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 0.75,
+        "matched": [
+          "cache",
+          "revalidate",
+          "CDN"
+        ],
+        "missing": [
+          "cache-control"
+        ]
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "mixed-next-cache",
+      "category": "Mixed Thai/English developer questions",
+      "language": "mixed",
+      "mode": "hardcore-th",
+      "baseline": {
+        "tokens": 80,
+        "characters": 286,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 17,
+        "characters": 51,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 78.75,
+        "characters": 82.17,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 0.75,
+        "matched": [
+          "cache",
+          "revalidate",
+          "CDN"
+        ],
+        "missing": [
+          "cache-control"
+        ]
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "debug-node-env",
+      "category": "Debugging tasks",
+      "language": "en",
+      "mode": "minimal",
+      "baseline": {
+        "tokens": 69,
+        "characters": 382,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 21,
+        "characters": 93,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 69.57,
+        "characters": 75.65,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 0.75,
+        "matched": [
+          "dotenv",
+          "devDependencies",
+          "dependencies"
+        ],
+        "missing": [
+          "Docker"
+        ]
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "debug-node-env",
+      "category": "Debugging tasks",
+      "language": "en",
+      "mode": "balanced",
+      "baseline": {
+        "tokens": 69,
+        "characters": 382,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 31,
+        "characters": 151,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 55.07,
+        "characters": 60.47,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 0.75,
+        "matched": [
+          "dotenv",
+          "dependencies",
+          "Docker"
+        ],
+        "missing": [
+          "devDependencies"
+        ]
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "debug-node-env",
+      "category": "Debugging tasks",
+      "language": "en",
+      "mode": "senior",
+      "baseline": {
+        "tokens": 69,
+        "characters": 382,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 47,
+        "characters": 202,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 31.88,
+        "characters": 47.12,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "dotenv",
+          "devDependencies",
+          "dependencies",
+          "Docker"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "debug-node-env",
+      "category": "Debugging tasks",
+      "language": "en",
+      "mode": "thai-dev",
+      "baseline": {
+        "tokens": 69,
+        "characters": 382,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 33,
+        "characters": 140,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 52.17,
+        "characters": 63.35,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "dotenv",
+          "devDependencies",
+          "dependencies",
+          "Docker"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "debug-node-env",
+      "category": "Debugging tasks",
+      "language": "en",
+      "mode": "bilingual",
+      "baseline": {
+        "tokens": 69,
+        "characters": 382,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 34,
+        "characters": 125,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 50.72,
+        "characters": 67.28,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "dotenv",
+          "devDependencies",
+          "dependencies",
+          "Docker"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "debug-node-env",
+      "category": "Debugging tasks",
+      "language": "en",
+      "mode": "hardcore",
+      "baseline": {
+        "tokens": 69,
+        "characters": 382,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 22,
+        "characters": 90,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 68.12,
+        "characters": 76.44,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "dotenv",
+          "devDependencies",
+          "dependencies",
+          "Docker"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "debug-node-env",
+      "category": "Debugging tasks",
+      "language": "en",
+      "mode": "hardcore-th",
+      "baseline": {
+        "tokens": 69,
+        "characters": 382,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 20,
+        "characters": 79,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 71.01,
+        "characters": 79.32,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "dotenv",
+          "devDependencies",
+          "dependencies",
+          "Docker"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "arch-monolith-services",
+      "category": "Architecture questions",
+      "language": "en",
+      "mode": "minimal",
+      "baseline": {
+        "tokens": 67,
+        "characters": 393,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 21,
+        "characters": 106,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 68.66,
+        "characters": 73.03,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 0.75,
+        "matched": [
+          "modular",
+          "deploy",
+          "scaling"
+        ],
+        "missing": [
+          "ops"
+        ]
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "arch-monolith-services",
+      "category": "Architecture questions",
+      "language": "en",
+      "mode": "balanced",
+      "baseline": {
+        "tokens": 67,
+        "characters": 393,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 31,
+        "characters": 157,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 53.73,
+        "characters": 60.05,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "modular",
+          "deploy",
+          "scaling",
+          "ops"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "arch-monolith-services",
+      "category": "Architecture questions",
+      "language": "en",
+      "mode": "senior",
+      "baseline": {
+        "tokens": 67,
+        "characters": 393,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 36,
+        "characters": 181,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 46.27,
+        "characters": 53.94,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "modular",
+          "deploy",
+          "scaling",
+          "ops"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "arch-monolith-services",
+      "category": "Architecture questions",
+      "language": "en",
+      "mode": "thai-dev",
+      "baseline": {
+        "tokens": 67,
+        "characters": 393,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 39,
+        "characters": 142,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 41.79,
+        "characters": 63.87,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "modular",
+          "deploy",
+          "scaling",
+          "ops"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "arch-monolith-services",
+      "category": "Architecture questions",
+      "language": "en",
+      "mode": "bilingual",
+      "baseline": {
+        "tokens": 67,
+        "characters": 393,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 24,
+        "characters": 107,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 64.18,
+        "characters": 72.77,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 0.75,
+        "matched": [
+          "modular",
+          "deploy",
+          "ops"
+        ],
+        "missing": [
+          "scaling"
+        ]
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "arch-monolith-services",
+      "category": "Architecture questions",
+      "language": "en",
+      "mode": "hardcore",
+      "baseline": {
+        "tokens": 67,
+        "characters": 393,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 18,
+        "characters": 71,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 73.13,
+        "characters": 81.93,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 0.75,
+        "matched": [
+          "modular",
+          "deploy",
+          "ops"
+        ],
+        "missing": [
+          "scaling"
+        ]
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "arch-monolith-services",
+      "category": "Architecture questions",
+      "language": "en",
+      "mode": "hardcore-th",
+      "baseline": {
+        "tokens": 67,
+        "characters": 393,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 19,
+        "characters": 63,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 71.64,
+        "characters": 83.97,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 0.75,
+        "matched": [
+          "modular",
+          "deploy",
+          "ops"
+        ],
+        "missing": [
+          "scaling"
+        ]
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "security-jwt-localstorage",
+      "category": "Security warning cases",
+      "language": "en",
+      "mode": "minimal",
+      "baseline": {
+        "tokens": 81,
+        "characters": 384,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 30,
+        "characters": 124,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 62.96,
+        "characters": 67.71,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "localStorage",
+          "XSS",
+          "token",
+          "HttpOnly"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [
+          "XSS",
+          "steal",
+          "refresh token"
+        ],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "security-jwt-localstorage",
+      "category": "Security warning cases",
+      "language": "en",
+      "mode": "balanced",
+      "baseline": {
+        "tokens": 81,
+        "characters": 384,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 39,
+        "characters": 167,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 51.85,
+        "characters": 56.51,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "localStorage",
+          "XSS",
+          "token",
+          "HttpOnly"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [
+          "XSS",
+          "steal",
+          "refresh token"
+        ],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "security-jwt-localstorage",
+      "category": "Security warning cases",
+      "language": "en",
+      "mode": "senior",
+      "baseline": {
+        "tokens": 81,
+        "characters": 384,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 53,
+        "characters": 217,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 34.57,
+        "characters": 43.49,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "localStorage",
+          "XSS",
+          "token",
+          "HttpOnly"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [
+          "XSS",
+          "steal",
+          "refresh token"
+        ],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "security-jwt-localstorage",
+      "category": "Security warning cases",
+      "language": "en",
+      "mode": "thai-dev",
+      "baseline": {
+        "tokens": 81,
+        "characters": 384,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 48,
+        "characters": 177,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 40.74,
+        "characters": 53.91,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "localStorage",
+          "XSS",
+          "token",
+          "HttpOnly"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [
+          "XSS",
+          "steal",
+          "refresh token"
+        ],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "security-jwt-localstorage",
+      "category": "Security warning cases",
+      "language": "en",
+      "mode": "bilingual",
+      "baseline": {
+        "tokens": 81,
+        "characters": 384,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 38,
+        "characters": 127,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 53.09,
+        "characters": 66.93,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "localStorage",
+          "XSS",
+          "token",
+          "HttpOnly"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [
+          "XSS",
+          "steal",
+          "refresh token"
+        ],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "security-jwt-localstorage",
+      "category": "Security warning cases",
+      "language": "en",
+      "mode": "hardcore",
+      "baseline": {
+        "tokens": 81,
+        "characters": 384,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 23,
+        "characters": 96,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 71.6,
+        "characters": 75,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "localStorage",
+          "XSS",
+          "token",
+          "HttpOnly"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [
+          "XSS",
+          "steal",
+          "refresh token"
+        ],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "security-jwt-localstorage",
+      "category": "Security warning cases",
+      "language": "en",
+      "mode": "hardcore-th",
+      "baseline": {
+        "tokens": 81,
+        "characters": 384,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 22,
+        "characters": 76,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 72.84,
+        "characters": 80.21,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 0.75,
+        "matched": [
+          "XSS",
+          "token",
+          "HttpOnly"
+        ],
+        "missing": [
+          "localStorage"
+        ]
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [
+          "XSS",
+          "steal",
+          "refresh token"
+        ],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "data-loss-prisma-reset",
+      "category": "Data-loss warning cases",
+      "language": "mixed",
+      "mode": "minimal",
+      "baseline": {
+        "tokens": 64,
+        "characters": 251,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 30,
+        "characters": 110,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 53.13,
+        "characters": 56.18,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "prisma migrate reset",
+          "production",
+          "drop",
+          "backup"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [
+          "drop",
+          "ข้อมูลหาย",
+          "Data loss"
+        ],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "data-loss-prisma-reset",
+      "category": "Data-loss warning cases",
+      "language": "mixed",
+      "mode": "balanced",
+      "baseline": {
+        "tokens": 64,
+        "characters": 251,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 41,
+        "characters": 146,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 35.94,
+        "characters": 41.83,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "prisma migrate reset",
+          "production",
+          "drop",
+          "backup"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [
+          "drop",
+          "ข้อมูลหาย",
+          "Data loss"
+        ],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "data-loss-prisma-reset",
+      "category": "Data-loss warning cases",
+      "language": "mixed",
+      "mode": "senior",
+      "baseline": {
+        "tokens": 64,
+        "characters": 251,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 48,
+        "characters": 169,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 25,
+        "characters": 32.67,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "prisma migrate reset",
+          "production",
+          "drop",
+          "backup"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [
+          "drop",
+          "ข้อมูลหาย",
+          "Data loss"
+        ],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "data-loss-prisma-reset",
+      "category": "Data-loss warning cases",
+      "language": "mixed",
+      "mode": "thai-dev",
+      "baseline": {
+        "tokens": 64,
+        "characters": 251,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 38,
+        "characters": 143,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 40.63,
+        "characters": 43.03,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "prisma migrate reset",
+          "production",
+          "drop",
+          "backup"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [
+          "drop",
+          "ข้อมูลหาย",
+          "Data loss"
+        ],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "data-loss-prisma-reset",
+      "category": "Data-loss warning cases",
+      "language": "mixed",
+      "mode": "bilingual",
+      "baseline": {
+        "tokens": 64,
+        "characters": 251,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 31,
+        "characters": 120,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 51.56,
+        "characters": 52.19,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "prisma migrate reset",
+          "production",
+          "drop",
+          "backup"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [
+          "drop",
+          "ข้อมูลหาย",
+          "Data loss"
+        ],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "data-loss-prisma-reset",
+      "category": "Data-loss warning cases",
+      "language": "mixed",
+      "mode": "hardcore",
+      "baseline": {
+        "tokens": 64,
+        "characters": 251,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 25,
+        "characters": 88,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 60.94,
+        "characters": 64.94,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "prisma migrate reset",
+          "production",
+          "drop",
+          "backup"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [
+          "drop",
+          "ข้อมูลหาย",
+          "Data loss"
+        ],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "data-loss-prisma-reset",
+      "category": "Data-loss warning cases",
+      "language": "mixed",
+      "mode": "hardcore-th",
+      "baseline": {
+        "tokens": 64,
+        "characters": 251,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 19,
+        "characters": 65,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 70.31,
+        "characters": 74.1,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 0.75,
+        "matched": [
+          "production",
+          "drop",
+          "backup"
+        ],
+        "missing": [
+          "prisma migrate reset"
+        ]
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [
+          "drop",
+          "ข้อมูลหาย",
+          "Data loss"
+        ],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "th-stacktrace-typeerror",
+      "category": "Thai with English stack traces",
+      "language": "mixed",
+      "mode": "minimal",
+      "baseline": {
+        "tokens": 63,
+        "characters": 218,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 27,
+        "characters": 88,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 57.14,
+        "characters": 59.63,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "map",
+          "undefined",
+          "render",
+          "default"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [
+          "อย่า",
+          "catch"
+        ],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "th-stacktrace-typeerror",
+      "category": "Thai with English stack traces",
+      "language": "mixed",
+      "mode": "balanced",
+      "baseline": {
+        "tokens": 63,
+        "characters": 218,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 35,
+        "characters": 110,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 44.44,
+        "characters": 49.54,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 0.75,
+        "matched": [
+          "map",
+          "undefined",
+          "render"
+        ],
+        "missing": [
+          "default"
+        ]
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [
+          "อย่า",
+          "catch"
+        ],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "th-stacktrace-typeerror",
+      "category": "Thai with English stack traces",
+      "language": "mixed",
+      "mode": "senior",
+      "baseline": {
+        "tokens": 63,
+        "characters": 218,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 42,
+        "characters": 149,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 33.33,
+        "characters": 31.65,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "map",
+          "undefined",
+          "render",
+          "default"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [
+          "อย่า",
+          "catch"
+        ],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "th-stacktrace-typeerror",
+      "category": "Thai with English stack traces",
+      "language": "mixed",
+      "mode": "thai-dev",
+      "baseline": {
+        "tokens": 63,
+        "characters": 218,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 35,
+        "characters": 115,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 44.44,
+        "characters": 47.25,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "map",
+          "undefined",
+          "render",
+          "default"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [
+          "อย่า",
+          "catch"
+        ],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "th-stacktrace-typeerror",
+      "category": "Thai with English stack traces",
+      "language": "mixed",
+      "mode": "bilingual",
+      "baseline": {
+        "tokens": 63,
+        "characters": 218,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 36,
+        "characters": 106,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 42.86,
+        "characters": 51.38,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "map",
+          "undefined",
+          "render",
+          "default"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [
+          "อย่า",
+          "catch"
+        ],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "th-stacktrace-typeerror",
+      "category": "Thai with English stack traces",
+      "language": "mixed",
+      "mode": "hardcore",
+      "baseline": {
+        "tokens": 63,
+        "characters": 218,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 18,
+        "characters": 57,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 71.43,
+        "characters": 73.85,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 0.75,
+        "matched": [
+          "map",
+          "undefined",
+          "default"
+        ],
+        "missing": [
+          "render"
+        ]
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [
+          "อย่า",
+          "catch"
+        ],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "th-stacktrace-typeerror",
+      "category": "Thai with English stack traces",
+      "language": "mixed",
+      "mode": "hardcore-th",
+      "baseline": {
+        "tokens": 63,
+        "characters": 218,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 16,
+        "characters": 53,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 74.6,
+        "characters": 75.69,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 0.75,
+        "matched": [
+          "map",
+          "undefined",
+          "default"
+        ],
+        "missing": [
+          "render"
+        ]
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [
+          "อย่า",
+          "catch"
+        ],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "th-cli-npm-error",
+      "category": "Thai with CLI output",
+      "language": "mixed",
+      "mode": "minimal",
+      "baseline": {
+        "tokens": 69,
+        "characters": 251,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 26,
+        "characters": 90,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 62.32,
+        "characters": 64.14,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "peer",
+          "React",
+          "MUI",
+          "version"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [
+          "force",
+          "risk"
+        ],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "th-cli-npm-error",
+      "category": "Thai with CLI output",
+      "language": "mixed",
+      "mode": "balanced",
+      "baseline": {
+        "tokens": 69,
+        "characters": 251,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 30,
+        "characters": 110,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 56.52,
+        "characters": 56.18,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "peer",
+          "React",
+          "MUI",
+          "version"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [
+          "force",
+          "risk"
+        ],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "th-cli-npm-error",
+      "category": "Thai with CLI output",
+      "language": "mixed",
+      "mode": "senior",
+      "baseline": {
+        "tokens": 69,
+        "characters": 251,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 33,
+        "characters": 133,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 52.17,
+        "characters": 47.01,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "peer",
+          "React",
+          "MUI",
+          "version"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [
+          "force",
+          "risk"
+        ],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "th-cli-npm-error",
+      "category": "Thai with CLI output",
+      "language": "mixed",
+      "mode": "thai-dev",
+      "baseline": {
+        "tokens": 69,
+        "characters": 251,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 28,
+        "characters": 99,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 59.42,
+        "characters": 60.56,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "peer",
+          "React",
+          "MUI",
+          "version"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [
+          "force",
+          "risk"
+        ],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "th-cli-npm-error",
+      "category": "Thai with CLI output",
+      "language": "mixed",
+      "mode": "bilingual",
+      "baseline": {
+        "tokens": 69,
+        "characters": 251,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 32,
+        "characters": 127,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 53.62,
+        "characters": 49.4,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "peer",
+          "React",
+          "MUI",
+          "version"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [
+          "force",
+          "risk"
+        ],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "th-cli-npm-error",
+      "category": "Thai with CLI output",
+      "language": "mixed",
+      "mode": "hardcore",
+      "baseline": {
+        "tokens": 69,
+        "characters": 251,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 16,
+        "characters": 47,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 76.81,
+        "characters": 81.27,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 0.75,
+        "matched": [
+          "peer",
+          "React",
+          "MUI"
+        ],
+        "missing": [
+          "version"
+        ]
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [
+          "force",
+          "risk"
+        ],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "th-cli-npm-error",
+      "category": "Thai with CLI output",
+      "language": "mixed",
+      "mode": "hardcore-th",
+      "baseline": {
+        "tokens": 69,
+        "characters": 251,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 16,
+        "characters": 46,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 76.81,
+        "characters": 81.67,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 0.75,
+        "matched": [
+          "peer",
+          "React",
+          "MUI"
+        ],
+        "missing": [
+          "version"
+        ]
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [
+          "force",
+          "risk"
+        ],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "th-debug-rerender",
+      "category": "Thai debugging prompts",
+      "language": "mixed",
+      "mode": "minimal",
+      "baseline": {
+        "tokens": 68,
+        "characters": 287,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 23,
+        "characters": 77,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 66.18,
+        "characters": 73.17,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "render",
+          "object",
+          "function",
+          "useMemo"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "th-debug-rerender",
+      "category": "Thai debugging prompts",
+      "language": "mixed",
+      "mode": "balanced",
+      "baseline": {
+        "tokens": 68,
+        "characters": 287,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 31,
+        "characters": 120,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 54.41,
+        "characters": 58.19,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "render",
+          "object",
+          "function",
+          "useMemo"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "th-debug-rerender",
+      "category": "Thai debugging prompts",
+      "language": "mixed",
+      "mode": "senior",
+      "baseline": {
+        "tokens": 68,
+        "characters": 287,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 41,
+        "characters": 154,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 39.71,
+        "characters": 46.34,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 0.75,
+        "matched": [
+          "object",
+          "function",
+          "useMemo"
+        ],
+        "missing": [
+          "render"
+        ]
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "th-debug-rerender",
+      "category": "Thai debugging prompts",
+      "language": "mixed",
+      "mode": "thai-dev",
+      "baseline": {
+        "tokens": 68,
+        "characters": 287,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 32,
+        "characters": 114,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 52.94,
+        "characters": 60.28,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "render",
+          "object",
+          "function",
+          "useMemo"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "th-debug-rerender",
+      "category": "Thai debugging prompts",
+      "language": "mixed",
+      "mode": "bilingual",
+      "baseline": {
+        "tokens": 68,
+        "characters": 287,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 28,
+        "characters": 104,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 58.82,
+        "characters": 63.76,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "render",
+          "object",
+          "function",
+          "useMemo"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "th-debug-rerender",
+      "category": "Thai debugging prompts",
+      "language": "mixed",
+      "mode": "hardcore",
+      "baseline": {
+        "tokens": 68,
+        "characters": 287,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 18,
+        "characters": 64,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 73.53,
+        "characters": 77.7,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "render",
+          "object",
+          "function",
+          "useMemo"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "th-debug-rerender",
+      "category": "Thai debugging prompts",
+      "language": "mixed",
+      "mode": "hardcore-th",
+      "baseline": {
+        "tokens": 68,
+        "characters": 287,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 9,
+        "characters": 41,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 86.76,
+        "characters": 85.71,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 0.75,
+        "matched": [
+          "render",
+          "object",
+          "function"
+        ],
+        "missing": [
+          "useMemo"
+        ]
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "th-devops-docker-slow",
+      "category": "Thai DevOps prompts",
+      "language": "mixed",
+      "mode": "minimal",
+      "baseline": {
+        "tokens": 67,
+        "characters": 259,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 18,
+        "characters": 62,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 73.13,
+        "characters": 76.06,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "Docker",
+          "cache",
+          "COPY",
+          ".dockerignore"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "th-devops-docker-slow",
+      "category": "Thai DevOps prompts",
+      "language": "mixed",
+      "mode": "balanced",
+      "baseline": {
+        "tokens": 67,
+        "characters": 259,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 34,
+        "characters": 112,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 49.25,
+        "characters": 56.76,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "Docker",
+          "cache",
+          "COPY",
+          ".dockerignore"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "th-devops-docker-slow",
+      "category": "Thai DevOps prompts",
+      "language": "mixed",
+      "mode": "senior",
+      "baseline": {
+        "tokens": 67,
+        "characters": 259,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 39,
+        "characters": 161,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 41.79,
+        "characters": 37.84,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "Docker",
+          "cache",
+          "COPY",
+          ".dockerignore"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "th-devops-docker-slow",
+      "category": "Thai DevOps prompts",
+      "language": "mixed",
+      "mode": "thai-dev",
+      "baseline": {
+        "tokens": 67,
+        "characters": 259,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 32,
+        "characters": 114,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 52.24,
+        "characters": 55.98,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "Docker",
+          "cache",
+          "COPY",
+          ".dockerignore"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "th-devops-docker-slow",
+      "category": "Thai DevOps prompts",
+      "language": "mixed",
+      "mode": "bilingual",
+      "baseline": {
+        "tokens": 67,
+        "characters": 259,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 29,
+        "characters": 101,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 56.72,
+        "characters": 61,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "Docker",
+          "cache",
+          "COPY",
+          ".dockerignore"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "th-devops-docker-slow",
+      "category": "Thai DevOps prompts",
+      "language": "mixed",
+      "mode": "hardcore",
+      "baseline": {
+        "tokens": 67,
+        "characters": 259,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 16,
+        "characters": 53,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 76.12,
+        "characters": 79.54,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "Docker",
+          "cache",
+          "COPY",
+          ".dockerignore"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "th-devops-docker-slow",
+      "category": "Thai DevOps prompts",
+      "language": "mixed",
+      "mode": "hardcore-th",
+      "baseline": {
+        "tokens": 67,
+        "characters": 259,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 16,
+        "characters": 53,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 76.12,
+        "characters": 79.54,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "Docker",
+          "cache",
+          "COPY",
+          ".dockerignore"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "th-sql-latest-include",
+      "category": "Thai SQL prompts",
+      "language": "mixed",
+      "mode": "minimal",
+      "baseline": {
+        "tokens": 70,
+        "characters": 275,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 22,
+        "characters": 69,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 68.57,
+        "characters": 74.91,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "include",
+          "latest",
+          "separate",
+          "order"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "th-sql-latest-include",
+      "category": "Thai SQL prompts",
+      "language": "mixed",
+      "mode": "balanced",
+      "baseline": {
+        "tokens": 70,
+        "characters": 275,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 38,
+        "characters": 118,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 45.71,
+        "characters": 57.09,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "include",
+          "latest",
+          "separate",
+          "order"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "th-sql-latest-include",
+      "category": "Thai SQL prompts",
+      "language": "mixed",
+      "mode": "senior",
+      "baseline": {
+        "tokens": 70,
+        "characters": 275,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 42,
+        "characters": 157,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 40,
+        "characters": 42.91,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "include",
+          "latest",
+          "separate",
+          "order"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "th-sql-latest-include",
+      "category": "Thai SQL prompts",
+      "language": "mixed",
+      "mode": "thai-dev",
+      "baseline": {
+        "tokens": 70,
+        "characters": 275,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 40,
+        "characters": 129,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 42.86,
+        "characters": 53.09,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "include",
+          "latest",
+          "separate",
+          "order"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "th-sql-latest-include",
+      "category": "Thai SQL prompts",
+      "language": "mixed",
+      "mode": "bilingual",
+      "baseline": {
+        "tokens": 70,
+        "characters": 275,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 26,
+        "characters": 120,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 62.86,
+        "characters": 56.36,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "include",
+          "latest",
+          "separate",
+          "order"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "th-sql-latest-include",
+      "category": "Thai SQL prompts",
+      "language": "mixed",
+      "mode": "hardcore",
+      "baseline": {
+        "tokens": 70,
+        "characters": 275,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 17,
+        "characters": 53,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 75.71,
+        "characters": 80.73,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "include",
+          "latest",
+          "separate",
+          "order"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    },
+    {
+      "id": "th-sql-latest-include",
+      "category": "Thai SQL prompts",
+      "language": "mixed",
+      "mode": "hardcore-th",
+      "baseline": {
+        "tokens": 70,
+        "characters": 275,
+        "lines": 3
+      },
+      "current": {
+        "tokens": 18,
+        "characters": 63,
+        "lines": 1
+      },
+      "reductions": {
+        "tokens": 74.29,
+        "characters": 77.09,
+        "lines": 66.67
+      },
+      "meaning": {
+        "score": 1,
+        "matched": [
+          "include",
+          "latest",
+          "separate",
+          "order"
+        ],
+        "missing": []
+      },
+      "warnings": {
+        "score": 1,
+        "matched": [],
+        "missing": []
+      },
+      "thaiQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "englishQuality": {
+        "score": 1,
+        "flags": []
+      },
+      "flags": []
+    }
+  ]
+}

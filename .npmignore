@@ -1,0 +1,9 @@
+node_modules/
+src/
+tests/
+coverage/
+.github/
+.DS_Store
+*.tgz
+npm-debug.log*
+benchmarks/results/

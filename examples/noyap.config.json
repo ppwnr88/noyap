@@ -1,0 +1,11 @@
+{
+  "language": "auto",
+  "mode": "balanced",
+  "preserveWarnings": true,
+  "codeFirst": true,
+  "maxExplanationLines": 4,
+  "preserveMixedLanguage": true,
+  "thaiTechnicalTerms": "preserve",
+  "naturalThaiMode": true,
+  "rolePreset": "default"
+}

@@ -1,0 +1,73 @@
+{
+  "name": "noyap",
+  "version": "0.1.0",
+  "description": "AI coding-agent communication optimizer with Thai-native and multilingual support.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "sideEffects": false,
+  "homepage": "https://github.com/ppwnr88/noyap#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ppwnr88/noyap.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ppwnr88/noyap/issues"
+  },
+  "bin": {
+    "noyap": "./bin/noyap.js"
+  },
+  "files": [
+    "bin",
+    "dist",
+    "benchmarks/cases.json",
+    "benchmarks/run-benchmark.js",
+    "benchmarks/README.md",
+    "templates",
+    "examples",
+    "README.md",
+    "README.th.md",
+    "CHANGELOG.md",
+    "SECURITY.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsc -p tsconfig.json --watch",
+    "lint": "tsc -p tsconfig.json --noEmit",
+    "test": "npm run build && node --test tests/*.test.js",
+    "benchmark": "node benchmarks/run-benchmark.js",
+    "doctor": "node bin/noyap.js doctor --self",
+    "prepublishOnly": "npm run lint && npm test && npm run benchmark",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "ai",
+    "prompt",
+    "ai-agent",
+    "claude",
+    "codex",
+    "cursor",
+    "copilot",
+    "multilingual",
+    "thai",
+    "developer-tools",
+    "prompt-engineering",
+    "token-optimization"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.10",
+    "gpt-tokenizer": "^3.4.0",
+    "typescript": "^5.7.2"
+  }
+}

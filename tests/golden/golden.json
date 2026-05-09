@@ -1,0 +1,82 @@
+[
+  {
+    "id": "thai-dev-rerender",
+    "category": "Thai developer prompts",
+    "prompt": "component rerender ตลอด เกิดจากอะไร",
+    "expected": "น่าจะมี object/function ถูกสร้างใหม่ทุก render. เช็ค useMemo/useCallback.",
+    "requiredTerms": ["object", "function", "render", "useMemo"],
+    "forbiddenTerms": ["กรุณา", "คุณควรทำการ", "สามารถที่จะ"],
+    "maxTokens": 24,
+    "warnings": []
+  },
+  {
+    "id": "mixed-next-deploy",
+    "category": "mixed Thai/English prompts",
+    "prompt": "nextjs build fail ตอน deploy",
+    "expected": "เช็ค version mismatch กับ env ก่อน. โดยเฉพาะ Next/MUI.",
+    "requiredTerms": ["version", "env", "Next"],
+    "forbiddenTerms": ["deployment configuration", "กรุณา"],
+    "maxTokens": 22,
+    "warnings": []
+  },
+  {
+    "id": "english-react",
+    "category": "English prompts",
+    "prompt": "Why does this component rerender?",
+    "expected": "Object/function recreated every render. Check useMemo/useCallback.",
+    "requiredTerms": ["Object", "function", "render", "useMemo"],
+    "forbiddenTerms": ["Certainly", "Sure", "I'd be happy"],
+    "maxTokens": 18,
+    "warnings": []
+  },
+  {
+    "id": "security-localstorage",
+    "category": "security warnings",
+    "prompt": "Can I store JWT access tokens in localStorage?",
+    "expected": "Risky. XSS can steal localStorage tokens. Prefer HttpOnly/SameSite cookies. Never store long-lived refresh tokens there.",
+    "requiredTerms": ["XSS", "localStorage", "HttpOnly", "refresh"],
+    "forbiddenTerms": ["perfectly safe", "no risk"],
+    "maxTokens": 34,
+    "warnings": ["XSS", "steal", "Never"]
+  },
+  {
+    "id": "data-loss-prisma",
+    "category": "data-loss warnings",
+    "prompt": "ใช้ prisma migrate reset บน production ได้ไหม",
+    "expected": "อย่าใช้บน production. prisma migrate reset drop DB/schema. Data loss/ข้อมูลหาย. ทำ migration ใหม่ + backup.",
+    "requiredTerms": ["production", "drop", "Data loss", "backup"],
+    "forbiddenTerms": ["ไม่มีผล", "ปลอดภัย"],
+    "maxTokens": 38,
+    "warnings": ["Data loss", "ข้อมูลหาย", "backup"]
+  },
+  {
+    "id": "debug-dotenv-docker",
+    "category": "debugging answers",
+    "prompt": "Docker says Cannot find module dotenv",
+    "expected": "Docker likely omits devDependencies. Move dotenv to dependencies or remove runtime import. Rebuild image.",
+    "requiredTerms": ["Docker", "devDependencies", "dependencies", "Rebuild"],
+    "forbiddenTerms": ["maybe try many things", "not sure"],
+    "maxTokens": 24,
+    "warnings": []
+  },
+  {
+    "id": "devops-docker-cache",
+    "category": "DevOps answers",
+    "prompt": "Docker build ช้ามาก",
+    "expected": "Layer cache น่าจะ miss. เช็ค COPY order กับ .dockerignore.",
+    "requiredTerms": ["cache", "COPY", ".dockerignore"],
+    "forbiddenTerms": ["กรุณาทำการ"],
+    "maxTokens": 22,
+    "warnings": []
+  },
+  {
+    "id": "sql-sequelize-latest",
+    "category": "SQL answers",
+    "prompt": "sequelize include ดึง latest row ยังไง",
+    "expected": "include ไม่ guarantee latest row. ใช้ separate + limit/order.",
+    "requiredTerms": ["include", "latest", "separate", "order"],
+    "forbiddenTerms": ["กรุณา", "ทำการดำเนินการ"],
+    "maxTokens": 22,
+    "warnings": []
+  }
+]
