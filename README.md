@@ -54,20 +54,20 @@ Less yap. More code.
 
 ### English
 
-| Before | After |
-|---|---|
+| Before                                                                                                                                                                                                                                                           | After                                                                                       |
+| --- | --- |
 | "Sure! The problem is most likely caused by the fact that your `options` object is recreated every time the component renders. React compares object props by reference, so this can trigger unnecessary child renders. You should use `useMemo` to memoize it." | "`options` is recreated every render. React compares by reference. Wrap it with `useMemo`." |
 
 ### Thai
 
-| Before | After |
-|---|---|
+| Before                                                                                                                                                                    | After                                                                                    |
+| --- | --- |
 | "ปัญหานี้น่าจะเกิดจาก request ที่ส่งไปยัง API ไม่มี Authorization header หรือ token หมดอายุแล้วครับ ลองตรวจสอบก่อนว่า frontend แนบ Bearer token ไปกับทุก request หรือไม่" | "น่าจะขาด `Authorization` header หรือ token หมดอายุ. เช็คว่า frontend ส่ง Bearer token." |
 
 ### Mixed Thai/English
 
-| Before | After |
-|---|---|
+| Before                                                                                                                                                                          | After                                                                              |
+| --- | --- |
 | "ปัญหานี้อาจเกิดจาก cache ของ Next.js หรือ CDN ยังถือ response เก่าอยู่หลัง deploy ครับ คุณควรตรวจสอบ revalidate setting, cache-control header และ purge CDN cache หลัง deploy" | "น่าจะ cache ค้างหลัง deploy. เช็ค `revalidate`, `cache-control`, แล้ว purge CDN." |
 
 Noyap is not "translate and shorten." Thai output should sound like Thai developers actually talk: `API`, `endpoint`, `deploy`, `build`, `bug`, `config`, `token`, `commit`, `branch`, `error`, `log`, `cache`, `Docker`, and `Nginx` can stay in English when natural.
@@ -85,17 +85,17 @@ Noyap is not "translate and shorten." Thai output should sound like Thai develop
 
 ## Supported Agents
 
-| Agent | Generated file | Default action |
-|---|---|---|
-| Claude Code | `CLAUDE.md` | Append Noyap section |
-| OpenAI Codex / Codex CLI | `AGENTS.md` | Append Noyap section |
-| Cursor | `.cursor/rules/noyap.mdc` | Create always-on rule |
-| Windsurf | `.windsurf/rules/noyap.md` | Create always-on rule |
-| GitHub Copilot | `.github/copilot-instructions.md` | Append Noyap section |
-| Cline | `.clinerules/noyap.md` | Create project rule |
-| Continue | `.continue/rules/noyap.md` | Create project rule |
-| Gemini CLI | `GEMINI.md` | Append Noyap section |
-| Roo Code | `.roo/rules/noyap.md` | Create project rule |
+| Agent                    | Generated file                    | Default action        |
+| --- | --- | --- |
+| Claude Code              | `CLAUDE.md`                       | Append Noyap section  |
+| OpenAI Codex / Codex CLI | `AGENTS.md`                       | Append Noyap section  |
+| Cursor                   | `.cursor/rules/noyap.mdc`         | Create always-on rule |
+| Windsurf                 | `.windsurf/rules/noyap.md`        | Create always-on rule |
+| GitHub Copilot           | `.github/copilot-instructions.md` | Append Noyap section  |
+| Cline                    | `.clinerules/noyap.md`            | Create project rule   |
+| Continue                 | `.continue/rules/noyap.md`        | Create project rule   |
+| Gemini CLI               | `GEMINI.md`                       | Append Noyap section  |
+| Roo Code                 | `.roo/rules/noyap.md`             | Create project rule   |
 
 ## Installation
 
@@ -218,30 +218,30 @@ npx noyap init --mode hardcore-th
 npx noyap init --mode hardcore --max-explanation-lines 1
 ```
 
-| Option | Values | Notes |
-|---|---|---|
-| `language` | `auto`, `en`, `th` | `auto` follows the user's language |
-| `mode` | `minimal`, `balanced`, `senior`, `thai-dev`, `bilingual`, `hardcore`, `hardcore-th` | Controls response density |
-| `rolePreset` | `default`, `backend`, `frontend`, `devops`, `sql`, `security`, `reviewer` | Adds role-specific priorities without changing language/mode |
-| `preserveWarnings` | `true`, `false` | Keep important warnings visible |
-| `codeFirst` | `true`, `false` | Put code or commands first when useful |
-| `maxExplanationLines` | number | Soft limit for extra explanation |
-| `preserveMixedLanguage` | `true`, `false` | Keep Thai/English developer style mixed when natural |
-| `thaiTechnicalTerms` | `preserve`, `translate` | Default keeps common dev terms in English |
-| `naturalThaiMode` | `true`, `false` | Avoid formal translated Thai |
+| Option                  | Values                                                                              | Notes                                                        |
+| --- | --- | --- |
+| `language`              | `auto`, `en`, `th`                                                                  | `auto` follows the user's language                           |
+| `mode`                  | `minimal`, `balanced`, `senior`, `thai-dev`, `bilingual`, `hardcore`, `hardcore-th` | Controls response density                                    |
+| `rolePreset`            | `default`, `backend`, `frontend`, `devops`, `sql`, `security`, `reviewer`           | Adds role-specific priorities without changing language/mode |
+| `preserveWarnings`      | `true`, `false`                                                                     | Keep important warnings visible                              |
+| `codeFirst`             | `true`, `false`                                                                     | Put code or commands first when useful                       |
+| `maxExplanationLines`   | number                                                                              | Soft limit for extra explanation                             |
+| `preserveMixedLanguage` | `true`, `false`                                                                     | Keep Thai/English developer style mixed when natural         |
+| `thaiTechnicalTerms`    | `preserve`, `translate`                                                             | Default keeps common dev terms in English                    |
+| `naturalThaiMode`       | `true`, `false`                                                                     | Avoid formal translated Thai                                 |
 
 ## Role Presets
 
 Presets slightly shift what the agent prioritizes while keeping the selected language and verbosity mode.
 
-| Preset | Adds emphasis on |
-|---|---|
-| `backend` | API contracts, auth, validation, migrations, observability |
-| `frontend` | rendering, state, accessibility, hydration, bundle impact |
-| `devops` | deploy safety, rollback, logs, env/config, Docker, CI/CD |
-| `sql` | query correctness, indexes, transactions, locking, data integrity |
-| `security` | threat model, auth, secrets, tokens, injection, XSS/CSRF |
-| `reviewer` | findings first, severity, regressions, missing tests |
+| Preset     | Adds emphasis on                                                  |
+| --- | --- |
+| `backend`  | API contracts, auth, validation, migrations, observability        |
+| `frontend` | rendering, state, accessibility, hydration, bundle impact         |
+| `devops`   | deploy safety, rollback, logs, env/config, Docker, CI/CD          |
+| `sql`      | query correctness, indexes, transactions, locking, data integrity |
+| `security` | threat model, auth, secrets, tokens, injection, XSS/CSRF          |
+| `reviewer` | findings first, severity, regressions, missing tests              |
 
 Example:
 
@@ -298,15 +298,15 @@ Doctor verifies:
 
 ## Verbosity Modes
 
-| Mode | Best for | Style |
-|---|---|---|
-| `minimal` | Simple fixes, CLI commands | Very short, enough context to act |
-| `balanced` | Daily coding-agent use | Concise but still clear |
-| `senior` | Architecture, reviews, risky changes | Short tradeoffs and caveats |
-| `thai-dev` | Thai developer workflow | Natural Thai plus common English dev terms |
-| `bilingual` | Thai/English teams | Preserves mixed-language style aggressively |
-| `hardcore` | Tiny answers, obvious fixes | Maximum compression, highest risk of losing nuance |
-| `hardcore-th` | Obvious Thai dev prompts | Very terse Thai with English technical terms |
+| Mode          | Best for                             | Style                                              |
+| --- | --- | --- |
+| `minimal`     | Simple fixes, CLI commands           | Very short, enough context to act                  |
+| `balanced`    | Daily coding-agent use               | Concise but still clear                            |
+| `senior`      | Architecture, reviews, risky changes | Short tradeoffs and caveats                        |
+| `thai-dev`    | Thai developer workflow              | Natural Thai plus common English dev terms         |
+| `bilingual`   | Thai/English teams                   | Preserves mixed-language style aggressively        |
+| `hardcore`    | Tiny answers, obvious fixes          | Maximum compression, highest risk of losing nuance |
+| `hardcore-th` | Obvious Thai dev prompts             | Very terse Thai with English technical terms       |
 
 Recommended defaults:
 
@@ -343,12 +343,12 @@ Noyap:
 
 Mixed-language examples:
 
-| Input | Output |
-|---|---|
-| `component rerender ตลอด เกิดจากอะไร` | `น่าจะมี object/function ถูกสร้างใหม่ทุก render. เช็ค useMemo/useCallback.` |
-| `sequelize include ดึง latest row ยังไง` | `include ไม่ guarantee latest row. ใช้ separate + limit/order.` |
-| `nextjs build fail ตอน deploy` | `เช็ค version mismatch กับ env ก่อน. โดยเฉพาะ Next/MUI.` |
-| `Docker build ช้ามาก` | `Layer cache น่าจะ miss. เช็ค COPY order กับ .dockerignore.` |
+| Input                                    | Output                                                                      |
+| --- | --- |
+| `component rerender ตลอด เกิดจากอะไร`    | `น่าจะมี object/function ถูกสร้างใหม่ทุก render. เช็ค useMemo/useCallback.` |
+| `sequelize include ดึง latest row ยังไง` | `include ไม่ guarantee latest row. ใช้ separate + limit/order.`             |
+| `nextjs build fail ตอน deploy`           | `เช็ค version mismatch กับ env ก่อน. โดยเฉพาะ Next/MUI.`                    |
+| `Docker build ช้ามาก`                    | `Layer cache น่าจะ miss. เช็ค COPY order กับ .dockerignore.`                |
 
 Thai prompt with English logs:
 
@@ -377,15 +377,15 @@ npm run benchmark
 
 Current fixture results:
 
-| Mode | Token reduction | Character reduction | Meaning preserved | Warning preserved |
-|---|---:|---:|---:|---:|
-| `minimal` | 67.53% | 70.96% | 93.75% | 100% |
-| `balanced` | 54.12% | 58.23% | 95.83% | 100% |
-| `senior` | 43.28% | 47.12% | 97.92% | 100% |
-| `thai-dev` | 52.07% | 58.12% | 100% | 100% |
-| `bilingual` | 59.5% | 63.35% | 95.83% | 100% |
-| `hardcore` | 74.83% | 79.16% | 87.5% | 100% |
-| `hardcore-th` | 75.96% | 80.68% | 81.25% | 100% |
+| Mode          | Token reduction | Character reduction | Meaning preserved | Warning preserved |
+| --- | --- | --- | --- | --- |
+| `minimal`     | 67.53%          | 70.96%              | 93.75%            | 100%              |
+| `balanced`    | 54.12%          | 58.23%              | 95.83%            | 100%              |
+| `senior`      | 43.28%          | 47.12%              | 97.92%            | 100%              |
+| `thai-dev`    | 52.07%          | 58.12%              | 100%              | 100%              |
+| `bilingual`   | 59.5%           | 63.35%              | 95.83%            | 100%              |
+| `hardcore`    | 74.83%          | 79.16%              | 87.5%             | 100%              |
+| `hardcore-th` | 75.96%          | 80.68%              | 81.25%            | 100%              |
 
 Reports:
 

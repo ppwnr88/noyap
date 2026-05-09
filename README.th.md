@@ -57,20 +57,20 @@ Noyap ช่วยบอก agent ให้:
 
 ### ภาษาไทย
 
-| ก่อน | หลัง |
-|---|---|
+| ก่อน                                                                                                                                                                 | หลัง                                            |
+| --- | --- |
 | "ปัญหานี้น่าจะเกิดจากการที่ object ถูกสร้างใหม่ทุกครั้งที่ component render ซึ่งอาจทำให้เกิดการ render ซ้ำโดยไม่จำเป็น แนะนำให้ใช้ useMemo เพื่อช่วยแก้ปัญหานี้ครับ" | "Object ถูกสร้างใหม่ทุก render. ใช้ `useMemo`." |
 
 ### ไทย + English แบบ dev ใช้จริง
 
-| ก่อน | หลัง |
-|---|---|
+| ก่อน                                                                                                                                                                            | หลัง                                                                               |
+| --- | --- |
 | "ปัญหานี้อาจเกิดจาก cache ของ Next.js หรือ CDN ยังถือ response เก่าอยู่หลัง deploy ครับ คุณควรตรวจสอบ revalidate setting, cache-control header และ purge CDN cache หลัง deploy" | "น่าจะ cache ค้างหลัง deploy. เช็ค `revalidate`, `cache-control`, แล้ว purge CDN." |
 
 ### English
 
-| Before | After |
-|---|---|
+| Before                                                                                                                                                                    | After                                                    |
+| --- | --- |
 | "Certainly! The issue appears to be that your object is recreated on every render, which may cause unnecessary re-renders. You should consider wrapping it with useMemo." | "Object recreated every render. Wrap it with `useMemo`." |
 
 ## เหมาะกับอะไร
@@ -84,17 +84,17 @@ Noyap ช่วยบอก agent ให้:
 
 ## Supported Agents
 
-| Agent | File ที่สร้าง | พฤติกรรม |
-|---|---|---|
-| Claude Code | `CLAUDE.md` | append section ของ Noyap |
-| OpenAI Codex / Codex CLI | `AGENTS.md` | append repo instructions |
-| Cursor | `.cursor/rules/noyap.mdc` | always-on rule |
-| Windsurf | `.windsurf/rules/noyap.md` | always-on rule |
-| GitHub Copilot | `.github/copilot-instructions.md` | append custom instructions |
-| Cline | `.clinerules/noyap.md` | project rule |
-| Continue | `.continue/rules/noyap.md` | project rule |
-| Gemini CLI | `GEMINI.md` | append project instructions |
-| Roo Code | `.roo/rules/noyap.md` | project rule |
+| Agent                    | File ที่สร้าง                     | พฤติกรรม                    |
+| --- | --- | --- |
+| Claude Code              | `CLAUDE.md`                       | append section ของ Noyap    |
+| OpenAI Codex / Codex CLI | `AGENTS.md`                       | append repo instructions    |
+| Cursor                   | `.cursor/rules/noyap.mdc`         | always-on rule              |
+| Windsurf                 | `.windsurf/rules/noyap.md`        | always-on rule              |
+| GitHub Copilot           | `.github/copilot-instructions.md` | append custom instructions  |
+| Cline                    | `.clinerules/noyap.md`            | project rule                |
+| Continue                 | `.continue/rules/noyap.md`        | project rule                |
+| Gemini CLI               | `GEMINI.md`                       | append project instructions |
+| Roo Code                 | `.roo/rules/noyap.md`             | project rule                |
 
 ## ติดตั้ง
 
@@ -223,30 +223,30 @@ npx noyap init --mode hardcore-th
 npx noyap init --mode hardcore --max-explanation-lines 1
 ```
 
-| Option | ค่า | อธิบาย |
-|---|---|---|
-| `language` | `auto`, `en`, `th` | `auto` ให้ตอบตามภาษาของ user |
-| `mode` | `minimal`, `balanced`, `senior`, `thai-dev`, `bilingual`, `hardcore`, `hardcore-th` | คุมความสั้น/ละเอียด |
-| `rolePreset` | `default`, `backend`, `frontend`, `devops`, `sql`, `security`, `reviewer` | ปรับ priority ตามงาน แต่ยังใช้ภาษา/mode เดิม |
-| `preserveWarnings` | `true`, `false` | เก็บ warning สำคัญไว้ |
-| `codeFirst` | `true`, `false` | งาน code ให้ขึ้น code/command ก่อน |
-| `maxExplanationLines` | number | จำกัดคำอธิบายเพิ่มแบบคร่าวๆ |
-| `preserveMixedLanguage` | `true`, `false` | รักษา style ไทย/English ปนกันเมื่อเป็นธรรมชาติ |
-| `thaiTechnicalTerms` | `preserve`, `translate` | default คือเก็บศัพท์ dev เป็น English |
-| `naturalThaiMode` | `true`, `false` | เลี่ยงภาษาไทยที่ฟังเหมือนแปล |
+| Option                  | ค่า                                                                                 | อธิบาย                                         |
+| --- | --- | --- |
+| `language`              | `auto`, `en`, `th`                                                                  | `auto` ให้ตอบตามภาษาของ user                   |
+| `mode`                  | `minimal`, `balanced`, `senior`, `thai-dev`, `bilingual`, `hardcore`, `hardcore-th` | คุมความสั้น/ละเอียด                            |
+| `rolePreset`            | `default`, `backend`, `frontend`, `devops`, `sql`, `security`, `reviewer`           | ปรับ priority ตามงาน แต่ยังใช้ภาษา/mode เดิม   |
+| `preserveWarnings`      | `true`, `false`                                                                     | เก็บ warning สำคัญไว้                          |
+| `codeFirst`             | `true`, `false`                                                                     | งาน code ให้ขึ้น code/command ก่อน             |
+| `maxExplanationLines`   | number                                                                              | จำกัดคำอธิบายเพิ่มแบบคร่าวๆ                    |
+| `preserveMixedLanguage` | `true`, `false`                                                                     | รักษา style ไทย/English ปนกันเมื่อเป็นธรรมชาติ |
+| `thaiTechnicalTerms`    | `preserve`, `translate`                                                             | default คือเก็บศัพท์ dev เป็น English          |
+| `naturalThaiMode`       | `true`, `false`                                                                     | เลี่ยงภาษาไทยที่ฟังเหมือนแปล                   |
 
 ## Role Presets
 
 Preset จะปรับน้ำหนักคำตอบนิดหน่อย โดยไม่เปลี่ยนภาษาและ verbosity mode ที่เลือกไว้
 
-| Preset | เน้นเรื่อง |
-|---|---|
-| `backend` | API contract, auth, validation, migration, observability |
-| `frontend` | render, state, accessibility, hydration, bundle impact |
-| `devops` | deploy safety, rollback, logs, env/config, Docker, CI/CD |
-| `sql` | query correctness, index, transaction, locking, data integrity |
-| `security` | threat model, auth, secret, token, injection, XSS/CSRF |
-| `reviewer` | finding ก่อน, severity, regression, missing tests |
+| Preset     | เน้นเรื่อง                                                     |
+| --- | --- |
+| `backend`  | API contract, auth, validation, migration, observability       |
+| `frontend` | render, state, accessibility, hydration, bundle impact         |
+| `devops`   | deploy safety, rollback, logs, env/config, Docker, CI/CD       |
+| `sql`      | query correctness, index, transaction, locking, data integrity |
+| `security` | threat model, auth, secret, token, injection, XSS/CSRF         |
+| `reviewer` | finding ก่อน, severity, regression, missing tests              |
 
 ตัวอย่าง:
 
@@ -305,15 +305,15 @@ Doctor จะเช็ค:
 
 ## Verbosity Modes
 
-| Mode | เหมาะกับ | Style |
-|---|---|---|
-| `minimal` | command ง่ายๆ, fix เล็กๆ | สั้นมาก แต่ยังพอทำตามได้ |
-| `balanced` | ใช้งานทั่วไป | สั้น ชัด ไม่ห้วนเกิน |
-| `senior` | architecture, review, risky change | มี tradeoff/caveat แต่ไม่ยาว |
-| `thai-dev` | ทีมไทยหรือ prompt ภาษาไทย | ไทยธรรมชาติ + technical terms ภาษาอังกฤษ |
-| `bilingual` | ทีมที่คุยไทย/English ปนกัน | รักษา mixed-language style ชัดที่สุด |
-| `hardcore` | งาน obvious มากๆ | สั้นสุด แต่เสี่ยงตก nuance |
-| `hardcore-th` | prompt ไทยที่ชัดมาก | ไทยสั้นมาก + technical terms ภาษาอังกฤษ |
+| Mode          | เหมาะกับ                           | Style                                    |
+| --- | --- | --- |
+| `minimal`     | command ง่ายๆ, fix เล็กๆ           | สั้นมาก แต่ยังพอทำตามได้                 |
+| `balanced`    | ใช้งานทั่วไป                       | สั้น ชัด ไม่ห้วนเกิน                     |
+| `senior`      | architecture, review, risky change | มี tradeoff/caveat แต่ไม่ยาว             |
+| `thai-dev`    | ทีมไทยหรือ prompt ภาษาไทย          | ไทยธรรมชาติ + technical terms ภาษาอังกฤษ |
+| `bilingual`   | ทีมที่คุยไทย/English ปนกัน         | รักษา mixed-language style ชัดที่สุด     |
+| `hardcore`    | งาน obvious มากๆ                   | สั้นสุด แต่เสี่ยงตก nuance               |
+| `hardcore-th` | prompt ไทยที่ชัดมาก                | ไทยสั้นมาก + technical terms ภาษาอังกฤษ  |
 
 แนะนำ:
 
@@ -355,12 +355,12 @@ Noyap:
 
 ตัวอย่าง mixed-language ที่ควรรักษา style:
 
-| User | Noyap |
-|---|---|
-| `component rerender ตลอด เกิดจากอะไร` | `น่าจะมี object/function ถูกสร้างใหม่ทุก render. เช็ค useMemo/useCallback.` |
-| `sequelize include ดึง latest row ยังไง` | `include ไม่ guarantee latest row. ใช้ separate + limit/order.` |
-| `nextjs build fail ตอน deploy` | `เช็ค version mismatch กับ env ก่อน. โดยเฉพาะ Next/MUI.` |
-| `Docker build ช้ามาก` | `Layer cache น่าจะ miss. เช็ค COPY order กับ .dockerignore.` |
+| User                                     | Noyap                                                                       |
+| --- | --- |
+| `component rerender ตลอด เกิดจากอะไร`    | `น่าจะมี object/function ถูกสร้างใหม่ทุก render. เช็ค useMemo/useCallback.` |
+| `sequelize include ดึง latest row ยังไง` | `include ไม่ guarantee latest row. ใช้ separate + limit/order.`             |
+| `nextjs build fail ตอน deploy`           | `เช็ค version mismatch กับ env ก่อน. โดยเฉพาะ Next/MUI.`                    |
+| `Docker build ช้ามาก`                    | `Layer cache น่าจะ miss. เช็ค COPY order กับ .dockerignore.`                |
 
 ถ้า user พิมพ์ไทยแต่ paste error/log ภาษาอังกฤษ:
 
@@ -387,15 +387,15 @@ npm run benchmark
 
 ผลล่าสุดจาก fixture:
 
-| Mode | Token reduction | Character reduction | Meaning preserved | Warning preserved |
-|---|---:|---:|---:|---:|
-| `minimal` | 67.53% | 70.96% | 93.75% | 100% |
-| `balanced` | 54.12% | 58.23% | 95.83% | 100% |
-| `senior` | 43.28% | 47.12% | 97.92% | 100% |
-| `thai-dev` | 52.07% | 58.12% | 100% | 100% |
-| `bilingual` | 59.5% | 63.35% | 95.83% | 100% |
-| `hardcore` | 74.83% | 79.16% | 87.5% | 100% |
-| `hardcore-th` | 75.96% | 80.68% | 81.25% | 100% |
+| Mode          | Token reduction | Character reduction | Meaning preserved | Warning preserved |
+| --- | --- | --- | --- | --- |
+| `minimal`     | 67.53%          | 70.96%              | 93.75%            | 100%              |
+| `balanced`    | 54.12%          | 58.23%              | 95.83%            | 100%              |
+| `senior`      | 43.28%          | 47.12%              | 97.92%            | 100%              |
+| `thai-dev`    | 52.07%          | 58.12%              | 100%              | 100%              |
+| `bilingual`   | 59.5%           | 63.35%              | 95.83%            | 100%              |
+| `hardcore`    | 74.83%          | 79.16%              | 87.5%             | 100%              |
+| `hardcore-th` | 75.96%          | 80.68%              | 81.25%            | 100%              |
 
 ไฟล์ report:
 
