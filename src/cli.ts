@@ -33,19 +33,19 @@ export const optionDefinitions = [
 ] as const;
 
 export const quickStartExamples = [
-  "npx noyap init --interactive",
-  "npx noyap init --all --mode balanced",
-  "npx noyap init --lang th --mode thai-dev",
-  "npx noyap doctor"
+  "npx @ppwnr88/noyap init --interactive",
+  "npx @ppwnr88/noyap init --all --mode balanced",
+  "npx @ppwnr88/noyap init --lang th --mode thai-dev",
+  "npx @ppwnr88/noyap doctor"
 ] as const;
 
 export const commonExamples = [
-  "npx noyap init --agent claude",
-  "npx noyap init --agent cursor --preset frontend",
-  "npx noyap init --mode thai-dev",
-  "npx noyap init --preset backend",
-  "npx noyap init --all --dry-run",
-  "npx noyap doctor --agent codex"
+  "npx @ppwnr88/noyap init --agent claude",
+  "npx @ppwnr88/noyap init --agent cursor --preset frontend",
+  "npx @ppwnr88/noyap init --mode thai-dev",
+  "npx @ppwnr88/noyap init --preset backend",
+  "npx @ppwnr88/noyap init --all --dry-run",
+  "npx @ppwnr88/noyap doctor --agent codex"
 ] as const;
 
 export const completionMetadata = {
@@ -66,7 +66,7 @@ export function formatHelp(): string {
     "Noyap - less yap, more code.",
     "",
     "Usage:",
-    "  npx noyap <command> [options]",
+    "  npx @ppwnr88/noyap <command> [options]",
     "",
     "Common usage:",
     ...quickStartExamples.map((example) => `  ${example}`),

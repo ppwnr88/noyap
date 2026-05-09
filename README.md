@@ -2,7 +2,7 @@
 
 AI coding-agent replies with less filler and more signal.
 
-[![npm](https://img.shields.io/npm/v/noyap?color=111827)](https://www.npmjs.com/package/noyap)
+[![npm](https://img.shields.io/npm/v/%40ppwnr88%2Fnoyap?color=111827)](https://www.npmjs.com/package/@ppwnr88/noyap)
 [![MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Thai supported](https://img.shields.io/badge/Thai-supported-16a34a)](README.th.md)
 
@@ -24,7 +24,7 @@ After
 ```
 
 ```bash
-npx noyap init --all --mode balanced
+npx @ppwnr88/noyap init --all --mode balanced
 ```
 
 ## Why Noyap?
@@ -102,39 +102,47 @@ Noyap is not "translate and shorten." Thai output should sound like Thai develop
 Run inside your project:
 
 ```bash
-npx noyap init --interactive
+npx @ppwnr88/noyap init --interactive
 ```
 
 Install for every supported agent:
 
 ```bash
-npx noyap init --all
+npx @ppwnr88/noyap init --all
+```
+
+Global install keeps the CLI command as `noyap`:
+
+```bash
+npm install -g @ppwnr88/noyap
+noyap init
+noyap doctor
 ```
 
 Install for one agent:
 
 ```bash
-npx noyap init --agent claude
-npx noyap init --agent codex
-npx noyap init --agent cursor
+npx @ppwnr88/noyap init --agent claude
+npx @ppwnr88/noyap init --agent codex
+npx @ppwnr88/noyap init --agent cursor
 ```
 
 Preview without writing:
 
 ```bash
-npx noyap init --all --dry-run
+npx @ppwnr88/noyap init --all --dry-run
 ```
 
 Overwrite existing replace-mode rule files:
 
 ```bash
-npx noyap init --agent cursor --force
+npx @ppwnr88/noyap init --agent cursor --force
 ```
 
 ## Quick Start
 
 ```bash
-npx noyap init --all --mode balanced
+npx @ppwnr88/noyap init --all --mode balanced
 ```
 
 Terminal output:
@@ -161,23 +169,23 @@ Done.
 Help output:
 
 ```text
-$ npx noyap --help
+$ npx @ppwnr88/noyap --help
 Noyap - less yap, more code.
 
 Usage:
-  npx noyap <command> [options]
+  npx @ppwnr88/noyap <command> [options]
 
 Common usage:
-  npx noyap init --interactive
-  npx noyap init --all --mode balanced
-  npx noyap init --lang th --mode thai-dev
-  npx noyap doctor
+  npx @ppwnr88/noyap init --interactive
+  npx @ppwnr88/noyap init --all --mode balanced
+  npx @ppwnr88/noyap init --lang th --mode thai-dev
+  npx @ppwnr88/noyap doctor
 ```
 
 Interactive mode:
 
 ```bash
-npx noyap init --interactive
+npx @ppwnr88/noyap init --interactive
 ```
 
 It asks for agent, verbosity mode, language mode, role preset, then confirms generation.
@@ -185,7 +193,7 @@ It asks for agent, verbosity mode, language mode, role preset, then confirms gen
 Thai-first setup:
 
 ```bash
-npx noyap init --all --lang th --mode thai-dev
+npx @ppwnr88/noyap init --all --lang th --mode thai-dev
 ```
 
 ## Configuration
@@ -209,13 +217,13 @@ Noyap writes `noyap.config.json`:
 CLI examples:
 
 ```bash
-npx noyap init --lang auto --mode balanced
-npx noyap init --lang th --mode thai-dev
-npx noyap init --mode bilingual
-npx noyap init --preset backend
-npx noyap init --preset security --mode senior
-npx noyap init --mode hardcore-th
-npx noyap init --mode hardcore --max-explanation-lines 1
+npx @ppwnr88/noyap init --lang auto --mode balanced
+npx @ppwnr88/noyap init --lang th --mode thai-dev
+npx @ppwnr88/noyap init --mode bilingual
+npx @ppwnr88/noyap init --preset backend
+npx @ppwnr88/noyap init --preset security --mode senior
+npx @ppwnr88/noyap init --mode hardcore-th
+npx @ppwnr88/noyap init --mode hardcore --max-explanation-lines 1
 ```
 
 | Option                  | Values                                                                              | Notes                                                        |
@@ -246,7 +254,7 @@ Presets slightly shift what the agent prioritizes while keeping the selected lan
 Example:
 
 ```bash
-npx noyap init --all --mode senior --preset reviewer
+npx @ppwnr88/noyap init --all --mode senior --preset reviewer
 ```
 
 ## Safety Rules
@@ -266,9 +274,9 @@ Noyap tells agents to keep critical warnings even when answers are short. It mus
 Check that Noyap is installed correctly:
 
 ```bash
-npx noyap doctor
-npx noyap doctor --agent cursor
-npx noyap doctor --all
+npx @ppwnr88/noyap doctor
+npx @ppwnr88/noyap doctor --agent cursor
+npx @ppwnr88/noyap doctor --all
 ```
 
 Example:
@@ -445,6 +453,16 @@ npm test
 npm run benchmark
 npm run doctor
 ```
+
+Release check:
+
+```bash
+npm pack
+npm publish --dry-run --access public
+npm publish --access public
+```
+
+Noyap is published as the scoped package `@ppwnr88/noyap`, so public npm releases must include `--access public`.
 
 ## License
 

@@ -2,7 +2,7 @@
 
 ทำให้ AI coding agent ตอบสั้นลง ชัดขึ้น และเข้าเรื่องกว่าเดิม
 
-[![npm](https://img.shields.io/npm/v/noyap?color=111827)](https://www.npmjs.com/package/noyap)
+[![npm](https://img.shields.io/npm/v/%40ppwnr88%2Fnoyap?color=111827)](https://www.npmjs.com/package/@ppwnr88/noyap)
 [![MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![English README](https://img.shields.io/badge/README-English-2563eb)](README.md)
 
@@ -30,7 +30,7 @@ Noyap ติดตั้ง rule/instruction ให้ AI coding agent หลา
 ติดตั้ง:
 
 ```bash
-npx noyap init --interactive
+npx @ppwnr88/noyap init --interactive
 ```
 
 ## ทำไมต้อง Noyap?
@@ -101,39 +101,47 @@ Noyap ช่วยบอก agent ให้:
 ติดตั้ง default:
 
 ```bash
-npx noyap init
+npx @ppwnr88/noyap init
 ```
 
 ติดตั้งทุก agent ที่รองรับ:
 
 ```bash
-npx noyap init --all
+npx @ppwnr88/noyap init --all
+```
+
+ถ้าติดตั้งแบบ global คำสั่ง CLI ยังเป็น `noyap`:
+
+```bash
+npm install -g @ppwnr88/noyap
+noyap init
+noyap doctor
 ```
 
 ติดตั้งเฉพาะ agent:
 
 ```bash
-npx noyap init --agent claude
-npx noyap init --agent codex
-npx noyap init --agent cursor
+npx @ppwnr88/noyap init --agent claude
+npx @ppwnr88/noyap init --agent codex
+npx @ppwnr88/noyap init --agent cursor
 ```
 
 ตั้งค่าให้เหมาะกับทีมไทย:
 
 ```bash
-npx noyap init --all --lang th --mode thai-dev
+npx @ppwnr88/noyap init --all --lang th --mode thai-dev
 ```
 
 ลองดูก่อน ยังไม่เขียนไฟล์:
 
 ```bash
-npx noyap init --all --dry-run
+npx @ppwnr88/noyap init --all --dry-run
 ```
 
 ถ้าไฟล์ rule มีอยู่แล้วและอยากเขียนทับ:
 
 ```bash
-npx noyap init --agent cursor --force
+npx @ppwnr88/noyap init --agent cursor --force
 ```
 
 CLI ปลอดภัยโดย default:
@@ -145,7 +153,7 @@ CLI ปลอดภัยโดย default:
 ## Quick Start
 
 ```bash
-npx noyap init --all --lang th --mode thai-dev
+npx @ppwnr88/noyap init --all --lang th --mode thai-dev
 ```
 
 ตัวอย่าง terminal output:
@@ -172,23 +180,23 @@ Done.
 Help output:
 
 ```text
-$ npx noyap --help
+$ npx @ppwnr88/noyap --help
 Noyap - less yap, more code.
 
 Usage:
-  npx noyap <command> [options]
+  npx @ppwnr88/noyap <command> [options]
 
 Common usage:
-  npx noyap init --interactive
-  npx noyap init --all --mode balanced
-  npx noyap init --lang th --mode thai-dev
-  npx noyap doctor
+  npx @ppwnr88/noyap init --interactive
+  npx @ppwnr88/noyap init --all --mode balanced
+  npx @ppwnr88/noyap init --lang th --mode thai-dev
+  npx @ppwnr88/noyap doctor
 ```
 
 Interactive mode:
 
 ```bash
-npx noyap init --interactive
+npx @ppwnr88/noyap init --interactive
 ```
 
 CLI จะถาม agent, verbosity mode, language mode, role preset แล้วให้ confirm ก่อน generate ไฟล์
@@ -214,13 +222,13 @@ Noyap สร้าง `noyap.config.json`:
 ตัวอย่าง:
 
 ```bash
-npx noyap init --lang auto --mode balanced
-npx noyap init --lang th --mode thai-dev
-npx noyap init --mode bilingual
-npx noyap init --preset backend
-npx noyap init --preset security --mode senior
-npx noyap init --mode hardcore-th
-npx noyap init --mode hardcore --max-explanation-lines 1
+npx @ppwnr88/noyap init --lang auto --mode balanced
+npx @ppwnr88/noyap init --lang th --mode thai-dev
+npx @ppwnr88/noyap init --mode bilingual
+npx @ppwnr88/noyap init --preset backend
+npx @ppwnr88/noyap init --preset security --mode senior
+npx @ppwnr88/noyap init --mode hardcore-th
+npx @ppwnr88/noyap init --mode hardcore --max-explanation-lines 1
 ```
 
 | Option                  | ค่า                                                                                 | อธิบาย                                         |
@@ -251,7 +259,7 @@ Preset จะปรับน้ำหนักคำตอบนิดหน่�
 ตัวอย่าง:
 
 ```bash
-npx noyap init --all --mode senior --preset reviewer
+npx @ppwnr88/noyap init --all --mode senior --preset reviewer
 ```
 
 ## Safety Rules
@@ -273,9 +281,9 @@ Noyap สั่ง agent ว่าห้ามตัดหรือทำให�
 เช็คว่า Noyap ติดตั้งถูกไหม:
 
 ```bash
-npx noyap doctor
-npx noyap doctor --agent cursor
-npx noyap doctor --all
+npx @ppwnr88/noyap doctor
+npx @ppwnr88/noyap doctor --agent cursor
+npx @ppwnr88/noyap doctor --all
 ```
 
 ตัวอย่าง:
@@ -453,6 +461,16 @@ npm test
 npm run benchmark
 npm run doctor
 ```
+
+เช็คก่อน release:
+
+```bash
+npm pack
+npm publish --dry-run --access public
+npm publish --access public
+```
+
+Noyap publish เป็น scoped package `@ppwnr88/noyap` ดังนั้นตอน publish จริงต้องใส่ `--access public`.
 
 ## License
 

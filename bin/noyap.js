@@ -135,7 +135,7 @@ function selfDoctor() {
   const root = dirname(dirname(fileURLToPath(import.meta.url)));
   const pkg = JSON.parse(readFileSync(join(root, "package.json"), "utf8"));
   const checks = [
-    ["package name", pkg.name === "noyap"],
+    ["package name", pkg.name === "@ppwnr88/noyap"],
     ["version", Boolean(pkg.version)],
     ["bin.noyap", pkg.bin?.noyap === "bin/noyap.js" || pkg.bin?.noyap === "./bin/noyap.js"],
     ["repository", pkg.repository?.url?.includes("github.com/ppwnr88/noyap")],
