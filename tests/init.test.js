@@ -1,10 +1,10 @@
 import assert from "node:assert/strict";
-import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import test from "node:test";
-import { doctor, init, parseArgs } from "../dist/index.js";
+import { detectAgentsMdConflicts, doctor, findAgentsMdChain, init, parseArgs } from "../dist/index.js";
 
 async function tempDir() {
   return mkdtemp(path.join(os.tmpdir(), "noyap-"));
@@ -50,6 +50,9 @@ test("parseArgs supports role presets", () => {
 test("parseArgs supports bilingual and hardcore-th modes", () => {
   assert.equal(parseArgs(["init", "--mode", "bilingual"]).config.mode, "bilingual");
   assert.equal(parseArgs(["init", "--mode", "hardcore-th"]).config.mode, "hardcore-th");
+  assert.equal(parseArgs(["init", "--agent", "codex", "--codex-strategy", "separate"]).codexStrategy, "separate");
+  assert.equal(parseArgs(["init", "--agent", "opencode", "--agents-md-strategy", "separate"]).agentsMdStrategy, "separate");
+  assert.equal(parseArgs(["init", "--agent", "opencode"]).agent, "opencode");
 });
 
 test("init creates config and selected agent file", async () => {
@@ -117,7 +120,7 @@ test("replace-mode files are not overwritten without force", async () => {
   }
 });
 
-test("append-mode files append once", async () => {
+test("codex merge preserves existing AGENTS.md and appends once", async () => {
   const cwd = await tempDir();
   try {
     await writeFile(path.join(cwd, "AGENTS.md"), "# Existing\n", "utf8");
@@ -128,6 +131,152 @@ test("append-mode files append once", async () => {
     const content = await readFile(path.join(cwd, "AGENTS.md"), "utf8");
     assert.equal((content.match(/noyap:rules/g) ?? []).length, 1);
     assert.match(content, /^# Existing/);
+  } finally {
+    await rm(cwd, { recursive: true, force: true });
+  }
+});
+
+test("codex separate strategy writes .noyap file and references it", async () => {
+  const cwd = await tempDir();
+  try {
+    await writeFile(path.join(cwd, "AGENTS.md"), "# Project Rules\n\n- Use pnpm\n", "utf8");
+
+    const results = await init(parseArgs(["init", "--agent", "codex", "--codex-strategy", "separate"], cwd));
+    const agents = await readFile(path.join(cwd, "AGENTS.md"), "utf8");
+    const separate = await readFile(path.join(cwd, ".noyap/AGENTS.noyap.md"), "utf8");
+
+    assert.equal(results.some((result) => result.status === "referenced" && result.file === "AGENTS.md"), true);
+    assert.match(agents, /Use pnpm/);
+    assert.match(agents, /\.noyap\/AGENTS\.noyap\.md/);
+    assert.match(separate, /noyap:rules/);
+
+    const check = await doctor({ cwd, agent: "codex", all: false });
+    assert.equal(check.ok, true);
+  } finally {
+    await rm(cwd, { recursive: true, force: true });
+  }
+});
+
+test("codex overwrite requires force or explicit overwrite strategy", async () => {
+  const cwd = await tempDir();
+  try {
+    await writeFile(path.join(cwd, "AGENTS.md"), "# Existing\n\n- Keep this\n", "utf8");
+
+    await init(parseArgs(["init", "--agent", "codex", "--force"], cwd));
+    const content = await readFile(path.join(cwd, "AGENTS.md"), "utf8");
+
+    assert.doesNotMatch(content, /Keep this/);
+    assert.match(content, /noyap:rules/);
+  } finally {
+    await rm(cwd, { recursive: true, force: true });
+  }
+});
+
+test("codex cancel strategy skips existing AGENTS.md", async () => {
+  const cwd = await tempDir();
+  try {
+    await writeFile(path.join(cwd, "AGENTS.md"), "# Existing\n", "utf8");
+
+    const results = await init(parseArgs(["init", "--agent", "codex", "--codex-strategy", "cancel"], cwd));
+    const content = await readFile(path.join(cwd, "AGENTS.md"), "utf8");
+
+    assert.equal(results.some((result) => result.status === "skipped" && result.file === "AGENTS.md"), true);
+    assert.equal(content, "# Existing\n");
+  } finally {
+    await rm(cwd, { recursive: true, force: true });
+  }
+});
+
+test("codex monorepo chain and conflict warnings respect nested AGENTS.md", async () => {
+  const root = await tempDir();
+  try {
+    await mkdir(path.join(root, ".git"));
+    await mkdir(path.join(root, "services/api"), { recursive: true });
+    await writeFile(path.join(root, "AGENTS.md"), "# Root\n\n- Always explain architectural decisions in detail.\n", "utf8");
+    await writeFile(path.join(root, "services/api/AGENTS.md"), "# API\n\n- Security explanations must be detailed.\n", "utf8");
+
+    const cwd = path.join(root, "services/api");
+    const opts = parseArgs(["init", "--agent", "codex", "--mode", "hardcore"], cwd);
+    const chain = await findAgentsMdChain(cwd);
+    const warnings = detectAgentsMdConflicts(chain, opts.config);
+    const results = await init(opts);
+
+    assert.deepEqual(chain.map((doc) => doc.file), ["../../AGENTS.md", "AGENTS.md"]);
+    assert.equal(warnings.length >= 2, true);
+    assert.equal(results.some((result) => result.status === "warning"), true);
+
+    const nested = await readFile(path.join(cwd, "AGENTS.md"), "utf8");
+    assert.match(nested, /Security explanations must be detailed/);
+    assert.match(nested, /noyap:rules/);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test("opencode generates AGENTS.md rules", async () => {
+  const cwd = await tempDir();
+  try {
+    const results = await init(parseArgs(["init", "--agent", "opencode"], cwd));
+    const content = await readFile(path.join(cwd, "AGENTS.md"), "utf8");
+
+    assert.equal(results.some((result) => result.agent.id === "opencode" && result.status === "created"), true);
+    assert.match(content, /Noyap For OpenCode/);
+    assert.match(content, /project instructions for OpenCode/);
+    assert.match(content, /Match the user's language/);
+    assert.match(content, /Never remove or weaken critical warnings/);
+  } finally {
+    await rm(cwd, { recursive: true, force: true });
+  }
+});
+
+test("opencode merge preserves existing AGENTS.md", async () => {
+  const cwd = await tempDir();
+  try {
+    await writeFile(path.join(cwd, "AGENTS.md"), "# Project Rules\n\n- Use bun.\n", "utf8");
+
+    const results = await init(parseArgs(["init", "--agent", "opencode"], cwd));
+    const content = await readFile(path.join(cwd, "AGENTS.md"), "utf8");
+
+    assert.equal(results.some((result) => result.agent.id === "opencode" && result.status === "merged"), true);
+    assert.match(content, /^# Project Rules/);
+    assert.match(content, /Use bun/);
+    assert.match(content, /Noyap For OpenCode/);
+  } finally {
+    await rm(cwd, { recursive: true, force: true });
+  }
+});
+
+test("opencode separate strategy writes .noyap file and doctor accepts it", async () => {
+  const cwd = await tempDir();
+  try {
+    await writeFile(path.join(cwd, "AGENTS.md"), "# OpenCode Project\n\n- Keep existing guidance.\n", "utf8");
+
+    const results = await init(parseArgs(["init", "--agent", "opencode", "--agents-md-strategy", "separate"], cwd));
+    const agents = await readFile(path.join(cwd, "AGENTS.md"), "utf8");
+    const separate = await readFile(path.join(cwd, ".noyap/AGENTS.noyap.md"), "utf8");
+
+    assert.equal(results.some((result) => result.agent.id === "opencode" && result.status === "referenced"), true);
+    assert.match(agents, /Keep existing guidance/);
+    assert.match(agents, /\.noyap\/AGENTS\.noyap\.md/);
+    assert.match(separate, /Noyap For OpenCode/);
+
+    const check = await doctor({ cwd, agent: "opencode", all: false });
+    assert.equal(check.ok, true);
+  } finally {
+    await rm(cwd, { recursive: true, force: true });
+  }
+});
+
+test("opencode separate strategy creates AGENTS.md reference when missing", async () => {
+  const cwd = await tempDir();
+  try {
+    const results = await init(parseArgs(["init", "--agent", "opencode", "--agents-md-strategy", "separate"], cwd));
+    const agents = await readFile(path.join(cwd, "AGENTS.md"), "utf8");
+    const separate = await readFile(path.join(cwd, ".noyap/AGENTS.noyap.md"), "utf8");
+
+    assert.equal(results.some((result) => result.file === "AGENTS.md" && result.status === "created"), true);
+    assert.match(agents, /\.noyap\/AGENTS\.noyap\.md/);
+    assert.match(separate, /Noyap For OpenCode/);
   } finally {
     await rm(cwd, { recursive: true, force: true });
   }

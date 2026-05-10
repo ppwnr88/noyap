@@ -7,7 +7,8 @@ export type AgentId =
   | "cline"
   | "continue"
   | "gemini"
-  | "roo";
+  | "roo"
+  | "opencode";
 
 export interface AgentTarget {
   id: AgentId;
@@ -24,7 +25,8 @@ export const agentAliases: Record<string, AgentId> = {
   "codex-cli": "codex",
   "github-copilot": "copilot",
   "gemini-cli": "gemini",
-  "roo-code": "roo"
+  "roo-code": "roo",
+  "open-code": "opencode"
 };
 
 export const agents: AgentTarget[] = [
@@ -99,6 +101,14 @@ export const agents: AgentTarget[] = [
     template: "roo.md",
     writeMode: "replace",
     notes: "Project rule file"
+  },
+  {
+    id: "opencode",
+    name: "OpenCode",
+    file: "AGENTS.md",
+    template: "opencode.md",
+    writeMode: "append",
+    notes: "Project instructions file"
   }
 ];
 

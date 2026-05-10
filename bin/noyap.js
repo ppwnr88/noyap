@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import readline from "node:readline/promises";
 import { fileURLToPath } from "node:url";
@@ -63,6 +63,7 @@ async function interactiveInitArgs() {
         { label: "All supported agents", value: "all" },
         { label: "Claude Code", value: "claude" },
         { label: "OpenAI Codex / Codex CLI", value: "codex" },
+        { label: "OpenCode", value: "opencode" },
         { label: "Cursor", value: "cursor" },
         { label: "Windsurf", value: "windsurf" },
         { label: "GitHub Copilot", value: "copilot" },
@@ -125,6 +126,31 @@ async function interactiveInitArgs() {
     if (preset !== "default") args.push("--preset", preset);
     if (agent === "all") args.push("--all");
     else if (agent !== "default") args.push("--agent", agent);
+
+    if (["default", "all", "codex", "opencode"].includes(agent) && existsSync(join(process.cwd(), "AGENTS.md"))) {
+      console.log(color.yellow("\nExisting AGENTS.md found."));
+      const codexStrategy = await askChoice(
+        rl,
+        "What would you like to do?",
+        [
+          { label: "Merge Noyap rules into existing AGENTS.md (recommended)", value: "merge" },
+          { label: "Create separate .noyap/AGENTS.noyap.md and reference it", value: "separate" },
+          { label: "Overwrite existing AGENTS.md", value: "overwrite" },
+          { label: "Cancel AGENTS.md rule generation", value: "cancel" }
+        ],
+        "1"
+      );
+      if (codexStrategy === "overwrite") {
+        const overwrite = (await rl.question("Overwrite AGENTS.md? Type overwrite to confirm: ")).trim();
+        if (overwrite !== "overwrite") {
+          args.push("--agents-md-strategy", "cancel");
+        } else {
+          args.push("--agents-md-strategy", "overwrite");
+        }
+      } else {
+        args.push("--agents-md-strategy", codexStrategy);
+      }
+    }
     return args;
   } finally {
     rl.close();
@@ -158,22 +184,26 @@ function completionScript(shell) {
   const modes = completionMetadata.modes.join(" ");
   const languages = completionMetadata.languages.join(" ");
   const presets = completionMetadata.rolePresets.join(" ");
+  const agentsMdStrategies = "merge separate overwrite cancel";
 
   if (shell === "zsh") {
     return `#compdef noyap
 _noyap() {
-  local -a commands agents modes languages presets
+  local -a commands agents modes languages presets agents_md_strategies
   commands=(${commands})
   agents=(${agents})
   modes=(${modes})
   languages=(${languages})
   presets=(${presets})
+  agents_md_strategies=(${agentsMdStrategies})
   _arguments \\
     '1:command:(${commands})' \\
     '--agent[Target agent]:agent:(${agents})' \\
     '--mode[Verbosity mode]:mode:(${modes})' \\
     '--lang[Language mode]:language:(${languages})' \\
     '--preset[Role preset]:preset:(${presets})' \\
+    '--agents-md-strategy[AGENTS.md strategy]:agents-md-strategy:(${agents_md_strategies})' \\
+    '--codex-strategy[Alias for --agents-md-strategy]:codex-strategy:(${agents_md_strategies})' \\
     '--all[All supported agents]' \\
     '--interactive[Guided init flow]' \\
     '--dry-run[Preview only]' \\
@@ -188,7 +218,7 @@ _noyap
   if (shell === "bash") {
     return `_noyap_complete() {
   local cur="\${COMP_WORDS[COMP_CWORD]}"
-  local words="${commands} --agent --mode --lang --preset --all --interactive --dry-run --force --help --version"
+  local words="${commands} --agent --mode --lang --preset --agents-md-strategy --codex-strategy --all --interactive --dry-run --force --help --version"
   COMPREPLY=( $(compgen -W "$words" -- "$cur") )
 }
 complete -F _noyap_complete noyap
@@ -203,6 +233,8 @@ complete -F _noyap_complete noyap
       `complete -c noyap -l mode -a '${modes}'`,
       `complete -c noyap -l lang -a '${languages}'`,
       `complete -c noyap -l preset -a '${presets}'`,
+      `complete -c noyap -l agents-md-strategy -a '${agentsMdStrategies}'`,
+      `complete -c noyap -l codex-strategy -a '${agentsMdStrategies}'`,
       "complete -c noyap -l all",
       "complete -c noyap -l interactive",
       "complete -c noyap -l dry-run",

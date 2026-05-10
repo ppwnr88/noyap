@@ -6,7 +6,7 @@
 [![MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![English README](https://img.shields.io/badge/README-English-2563eb)](README.md)
 
-Noyap ติดตั้ง rule/instruction ให้ AI coding agent หลายตัว เช่น Claude Code, Codex, Cursor, Windsurf, Copilot, Cline, Continue, Gemini CLI และ Roo Code
+Noyap ติดตั้ง rule/instruction ให้ AI coding agent หลายตัว เช่น Claude Code, Codex, OpenCode, Cursor, Windsurf, Copilot, Cline, Continue, Gemini CLI และ Roo Code
 
 เป้าหมายง่ายๆ:
 
@@ -87,7 +87,8 @@ Noyap ช่วยบอก agent ให้:
 | Agent                    | File ที่สร้าง                     | พฤติกรรม                    |
 | --- | --- | --- |
 | Claude Code              | `CLAUDE.md`                       | append section ของ Noyap    |
-| OpenAI Codex / Codex CLI | `AGENTS.md`                       | append repo instructions    |
+| OpenAI Codex / Codex CLI | `AGENTS.md`, `.noyap/AGENTS.noyap.md` | merge หรือแยกไฟล์แบบปลอดภัย |
+| OpenCode                 | `AGENTS.md`, `.noyap/AGENTS.noyap.md` | merge หรือแยกไฟล์แบบปลอดภัย |
 | Cursor                   | `.cursor/rules/noyap.mdc`         | always-on rule              |
 | Windsurf                 | `.windsurf/rules/noyap.md`        | always-on rule              |
 | GitHub Copilot           | `.github/copilot-instructions.md` | append custom instructions  |
@@ -123,6 +124,9 @@ noyap doctor
 ```bash
 npx @ppwnr88/noyap init --agent claude
 npx @ppwnr88/noyap init --agent codex
+npx @ppwnr88/noyap init --agent opencode
+npx @ppwnr88/noyap init --agent codex --agents-md-strategy separate
+npx @ppwnr88/noyap init --agent opencode --agents-md-strategy separate
 npx @ppwnr88/noyap init --agent cursor
 ```
 
@@ -146,9 +150,56 @@ npx @ppwnr88/noyap init --agent cursor --force
 
 CLI ปลอดภัยโดย default:
 
-- ไฟล์แบบ append เช่น `AGENTS.md`, `CLAUDE.md` จะเพิ่ม section ของ Noyap แค่ครั้งเดียว
+- ไฟล์แบบ append เช่น `CLAUDE.md` จะเพิ่ม section ของ Noyap แค่ครั้งเดียว
+- `AGENTS.md` ของ Codex/OpenCode จะ merge แบบปลอดภัย ไม่ overwrite เงียบๆ
 - ไฟล์ rule ที่ควร replace จะไม่ overwrite ถ้าไม่ส่ง `--force`
 - มี `--dry-run` ให้ preview ก่อน
+
+## AGENTS.md ที่มีอยู่แล้ว
+
+Noyap มอง `AGENTS.md` เป็น project guidance ของทีม ไม่ใช่ไฟล์ prompt ที่ควรเขียนทับง่ายๆ ใช้กับทั้ง Codex และ OpenCode
+
+ถ้ามี `AGENTS.md` อยู่แล้ว Noyap จะ default เป็น safe merge:
+
+- เก็บ rule เดิมและ formatting เดิมไว้
+- append section ของ Noyap พร้อม marker
+- rerun แล้วไม่เพิ่ม section ซ้ำ
+- เตือนถ้า terse mode อาจชนกับ rule ที่บอกให้ explain แบบละเอียด
+
+Interactive setup จะให้เลือก:
+
+```text
+Existing AGENTS.md found.
+
+What would you like to do?
+  1. Merge Noyap rules into existing AGENTS.md (recommended)
+  2. Create separate .noyap/AGENTS.noyap.md and reference it
+  3. Overwrite existing AGENTS.md
+  4. Cancel AGENTS.md rule generation
+```
+
+ถ้าอยากให้ `AGENTS.md` หลักสะอาด ให้แยกไฟล์ Noyap:
+
+```bash
+npx @ppwnr88/noyap init --agent opencode --agents-md-strategy separate
+```
+
+คำสั่งนี้จะสร้าง `.noyap/AGENTS.noyap.md` แล้วใส่ reference สั้นๆ ใน `AGENTS.md`
+
+`--force` overwrite ได้ แต่ต้องตั้งใจใช้เอง Noyap จะไม่ลบ rule เดิมแบบเงียบๆ
+
+### AGENTS.md แบบ Directory Scope
+
+Codex และ OpenCode ใช้ `AGENTS.md` เป็น project instructions. Noyap เลยเคารพ root/nested guidance แทนที่จะคิดว่ามีไฟล์ instruction เดียวทั้ง repo
+
+Noyap เคารพ model นี้:
+
+- รันที่ repo root เพื่อใส่ communication rule ระดับทั้ง repo
+- รันใน package/service เพื่อใส่ rule เฉพาะส่วนนั้น
+- conflict check จะดู chain ของ `AGENTS.md` จาก root ถึง directory ปัจจุบัน
+- rule เดิมเรื่อง architecture detail, security, migration, deploy risk และ warning ยังสำคัญกว่า
+
+OpenCode รองรับ `opencode.json` สำหรับ instruction เพิ่มเติมด้วย แต่ Noyap ยังเน้น AGENTS.md ก่อนเพื่อให้ setup เบา ใช้ `--agents-md-strategy separate` ถ้าอยากแยก Noyap ออกจากไฟล์หลัก
 
 ## Quick Start
 
@@ -171,9 +222,10 @@ Noyap init
 ✔ Generated Continue rule file
 ✔ Generated Gemini CLI rule file
 ✔ Generated Roo Code rule file
+✔ Already configured OpenCode rule file
 ✔ Thai-native mode enabled
 
-Summary: 10 created
+Summary: 10 created, 1 unchanged
 Done.
 ```
 
@@ -227,6 +279,8 @@ npx @ppwnr88/noyap init --lang th --mode thai-dev
 npx @ppwnr88/noyap init --mode bilingual
 npx @ppwnr88/noyap init --preset backend
 npx @ppwnr88/noyap init --preset security --mode senior
+npx @ppwnr88/noyap init --agent opencode
+npx @ppwnr88/noyap init --agent opencode --agents-md-strategy separate
 npx @ppwnr88/noyap init --mode hardcore-th
 npx @ppwnr88/noyap init --mode hardcore --max-explanation-lines 1
 ```
@@ -242,6 +296,7 @@ npx @ppwnr88/noyap init --mode hardcore --max-explanation-lines 1
 | `preserveMixedLanguage` | `true`, `false`                                                                     | รักษา style ไทย/English ปนกันเมื่อเป็นธรรมชาติ |
 | `thaiTechnicalTerms`    | `preserve`, `translate`                                                             | default คือเก็บศัพท์ dev เป็น English          |
 | `naturalThaiMode`       | `true`, `false`                                                                     | เลี่ยงภาษาไทยที่ฟังเหมือนแปล                   |
+| `agentsMdStrategy`      | `merge`, `separate`, `overwrite`, `cancel`                                          | CLI-only option ตอนเจอ `AGENTS.md` เดิม        |
 
 ## Role Presets
 

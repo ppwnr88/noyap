@@ -1,9 +1,9 @@
 <!-- noyap:rules -->
-# Noyap For {{agentName}}
+# Noyap For OpenCode
 
 Less yap. More code.
 
-Noyap is an additive communication layer. Keep project-specific AGENTS.md rules authoritative when they require extra detail, security context, migration caution, test steps, or architecture rationale.
+These rules are project instructions for OpenCode. Noyap is an additive communication layer; keep existing AGENTS.md project guidance authoritative when it requires extra detail, security context, migration caution, test steps, or architecture rationale.
 
 Use these communication rules:
 - Match the user's language: English, Thai, or natural Thai/English mix.

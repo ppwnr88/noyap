@@ -20,6 +20,8 @@ export const optionDefinitions = [
   { flag: "--lang <value>", summary: languages.join(" | ") },
   { flag: "--mode <value>", summary: modes.join(" | ") },
   { flag: "--preset <value>", summary: rolePresets.join(" | ") },
+  { flag: "--agents-md-strategy <value>", summary: "merge | separate | overwrite | cancel" },
+  { flag: "--codex-strategy <value>", summary: "Alias for --agents-md-strategy" },
   { flag: "--thai-technical-terms <v>", summary: thaiTechnicalTermModes.join(" | ") },
   { flag: "--preserve-mixed-language", summary: "Keep natural Thai/English mixed style" },
   { flag: "--no-preserve-mixed-language", summary: "Disable mixed-language preservation" },
@@ -41,6 +43,8 @@ export const quickStartExamples = [
 
 export const commonExamples = [
   "npx @ppwnr88/noyap init --agent claude",
+  "npx @ppwnr88/noyap init --agent codex --agents-md-strategy separate",
+  "npx @ppwnr88/noyap init --agent opencode",
   "npx @ppwnr88/noyap init --agent cursor --preset frontend",
   "npx @ppwnr88/noyap init --mode thai-dev",
   "npx @ppwnr88/noyap init --preset backend",

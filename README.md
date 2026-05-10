@@ -6,7 +6,7 @@ AI coding-agent replies with less filler and more signal.
 [![MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Thai supported](https://img.shields.io/badge/Thai-supported-16a34a)](README.th.md)
 
-Noyap installs communication rules for Claude Code, Codex, Cursor, Windsurf, Copilot, Cline, Continue, Gemini CLI, and Roo Code.
+Noyap installs communication rules for Claude Code, Codex, OpenCode, Cursor, Windsurf, Copilot, Cline, Continue, Gemini CLI, and Roo Code.
 
 It keeps answers short, code-first, and practical while preserving technical meaning, warnings, and natural language style.
 
@@ -88,7 +88,8 @@ Noyap is not "translate and shorten." Thai output should sound like Thai develop
 | Agent                    | Generated file                    | Default action        |
 | --- | --- | --- |
 | Claude Code              | `CLAUDE.md`                       | Append Noyap section  |
-| OpenAI Codex / Codex CLI | `AGENTS.md`                       | Append Noyap section  |
+| OpenAI Codex / Codex CLI | `AGENTS.md`, `.noyap/AGENTS.noyap.md` | Merge or separate safe rules |
+| OpenCode                 | `AGENTS.md`, `.noyap/AGENTS.noyap.md` | Merge or separate safe rules |
 | Cursor                   | `.cursor/rules/noyap.mdc`         | Create always-on rule |
 | Windsurf                 | `.windsurf/rules/noyap.md`        | Create always-on rule |
 | GitHub Copilot           | `.github/copilot-instructions.md` | Append Noyap section  |
@@ -124,6 +125,9 @@ Install for one agent:
 ```bash
 npx @ppwnr88/noyap init --agent claude
 npx @ppwnr88/noyap init --agent codex
+npx @ppwnr88/noyap init --agent opencode
+npx @ppwnr88/noyap init --agent codex --agents-md-strategy separate
+npx @ppwnr88/noyap init --agent opencode --agents-md-strategy separate
 npx @ppwnr88/noyap init --agent cursor
 ```
 
@@ -138,6 +142,52 @@ Overwrite existing replace-mode rule files:
 ```bash
 npx @ppwnr88/noyap init --agent cursor --force
 ```
+
+## Existing AGENTS.md
+
+Noyap treats `AGENTS.md` as project guidance, not a disposable prompt file. This applies to Codex and OpenCode.
+
+If `AGENTS.md` already exists, Noyap defaults to a safe merge:
+
+- preserves existing project rules and formatting
+- appends one Noyap section with a marker
+- avoids duplicate Noyap sections on later runs
+- warns when terse modes may conflict with project rules that require detailed explanations
+
+Interactive setup shows merge options:
+
+```text
+Existing AGENTS.md found.
+
+What would you like to do?
+  1. Merge Noyap rules into existing AGENTS.md (recommended)
+  2. Create separate .noyap/AGENTS.noyap.md and reference it
+  3. Overwrite existing AGENTS.md
+  4. Cancel AGENTS.md rule generation
+```
+
+Use a separate file when teams want the main `AGENTS.md` to stay focused:
+
+```bash
+npx @ppwnr88/noyap init --agent opencode --agents-md-strategy separate
+```
+
+This creates `.noyap/AGENTS.noyap.md` and adds a short reference in `AGENTS.md`.
+
+`--force` can overwrite, but it is explicit. Noyap will not silently replace existing AGENTS.md instructions.
+
+### Directory-Scoped AGENTS.md Rules
+
+Codex and OpenCode both use `AGENTS.md` for project instructions. Noyap respects root and nested project guidance instead of assuming one global instruction file.
+
+Noyap respects that model:
+
+- run from the repo root to add root-level communication rules
+- run from a package/service directory to add scoped rules for that workspace
+- conflict checks consider the active `AGENTS.md` chain from root to current directory
+- existing rules about architecture detail, security, migrations, deploy risk, and warnings stay authoritative
+
+OpenCode also supports `opencode.json` instruction files. Noyap stays AGENTS.md-first for now to keep setup lightweight; use `--agents-md-strategy separate` when you want the Noyap layer isolated.
 
 ## Quick Start
 
@@ -160,9 +210,10 @@ Noyap init
 ✔ Generated Continue rule file
 ✔ Generated Gemini CLI rule file
 ✔ Generated Roo Code rule file
+✔ Already configured OpenCode rule file
 ✔ Thai-native mode enabled
 
-Summary: 10 created
+Summary: 10 created, 1 unchanged
 Done.
 ```
 
@@ -222,6 +273,8 @@ npx @ppwnr88/noyap init --lang th --mode thai-dev
 npx @ppwnr88/noyap init --mode bilingual
 npx @ppwnr88/noyap init --preset backend
 npx @ppwnr88/noyap init --preset security --mode senior
+npx @ppwnr88/noyap init --agent opencode
+npx @ppwnr88/noyap init --agent opencode --agents-md-strategy separate
 npx @ppwnr88/noyap init --mode hardcore-th
 npx @ppwnr88/noyap init --mode hardcore --max-explanation-lines 1
 ```
@@ -237,6 +290,7 @@ npx @ppwnr88/noyap init --mode hardcore --max-explanation-lines 1
 | `preserveMixedLanguage` | `true`, `false`                                                                     | Keep Thai/English developer style mixed when natural         |
 | `thaiTechnicalTerms`    | `preserve`, `translate`                                                             | Default keeps common dev terms in English                    |
 | `naturalThaiMode`       | `true`, `false`                                                                     | Avoid formal translated Thai                                 |
+| `agentsMdStrategy`      | `merge`, `separate`, `overwrite`, `cancel`                                          | CLI-only option for existing `AGENTS.md` handling            |
 
 ## Role Presets
 

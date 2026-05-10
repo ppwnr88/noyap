@@ -4,6 +4,7 @@ import path from "node:path";
 import { agents, findAgent, type AgentTarget } from "./agents.js";
 import { languages, modes, normalizeConfig, rolePresets, thaiTechnicalTermModes, type NoyapConfig } from "./config.js";
 import { sentinel } from "./templates.js";
+import { noyapReferenceSentinel, noyapSeparateFile } from "./agents-md.js";
 
 export interface DoctorOptions {
   cwd: string;
@@ -86,6 +87,13 @@ export async function doctor(opts: DoctorOptions): Promise<DoctorResult> {
 
     const content = await readFile(filePath, "utf8");
     if (!content.includes(sentinel)) {
+      if (agent.file === "AGENTS.md" && (content.includes(noyapReferenceSentinel) || content.includes(noyapSeparateFile))) {
+        const separatePath = path.join(opts.cwd, noyapSeparateFile);
+        if (existsSync(separatePath) && (await readFile(separatePath, "utf8")).includes(sentinel)) {
+          checks.push({ name: `agent:${agent.id}`, status: "pass", message: `${agent.file} references ${noyapSeparateFile}` });
+          continue;
+        }
+      }
       checks.push({ name: `agent:${agent.id}`, status: "warn", message: `${agent.file} exists but has no Noyap marker` });
     } else {
       checks.push({ name: `agent:${agent.id}`, status: "pass", message: `${agent.file} exists with Noyap rules` });

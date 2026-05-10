@@ -3,6 +3,17 @@ import { existsSync } from "node:fs";
 import path from "node:path";
 import { agentAliases, agents, findAgent, type AgentTarget } from "./agents.js";
 import {
+  detectAgentsMdConflicts,
+  findAgentsMdChain,
+  mergeAgentsMd,
+  noyapReferenceSentinel,
+  noyapSeparateFile,
+  referenceSeparateAgentsMd,
+  type AgentsMdStrategy,
+  type CodexMergeStrategy,
+  writeTextFile
+} from "./agents-md.js";
+import {
   defaultConfig,
   languages,
   modes,
@@ -16,6 +27,15 @@ import { formatHelp } from "./cli.js";
 export { doctor, formatDoctorResult, type DoctorCheck, type DoctorOptions, type DoctorResult } from "./doctor.js";
 export { getRolePresetGuidance, getSafetyRulesText, rolePresetGuidance, safetyRules } from "./presets.js";
 export { commandDefinitions, commonExamples, completionMetadata, optionDefinitions, quickStartExamples } from "./cli.js";
+export {
+  detectAgentsMdConflicts,
+  findAgentsMdChain,
+  mergeAgentsMd,
+  parseAgentsMd,
+  referenceSeparateAgentsMd,
+  type AgentsMdStrategy,
+  type CodexMergeStrategy
+} from "./agents-md.js";
 
 export {
   detectLanguage,
@@ -34,13 +54,16 @@ export interface InitOptions {
   force: boolean;
   dryRun: boolean;
   interactive: boolean;
+  agentsMdStrategy: AgentsMdStrategy;
+  codexStrategy: CodexMergeStrategy;
   config: NoyapConfig;
 }
 
 export interface WriteResult {
   agent: AgentTarget;
-  status: "created" | "appended" | "overwritten" | "skipped" | "unchanged";
+  status: "created" | "appended" | "merged" | "referenced" | "overwritten" | "skipped" | "unchanged" | "warning";
   file: string;
+  message?: string;
 }
 
 function parseValue(argv: string[], index: number, flag: string): string {
@@ -56,6 +79,8 @@ export function parseArgs(argv: string[], cwd = process.cwd()): InitOptions & { 
     force: false,
     dryRun: false,
     interactive: false,
+    agentsMdStrategy: "merge",
+    codexStrategy: "merge",
     config: { ...defaultConfig },
     help: false,
     version: false
@@ -75,6 +100,14 @@ export function parseArgs(argv: string[], cwd = process.cwd()): InitOptions & { 
     else if (arg === "--force" || arg === "-f") opts.force = true;
     else if (arg === "--dry-run") opts.dryRun = true;
     else if (arg === "--interactive") opts.interactive = true;
+    else if (arg === "--agents-md-strategy" || arg === "--codex-strategy") {
+      const value = parseValue(argv, i++, arg);
+      if (!["merge", "separate", "overwrite", "cancel"].includes(value)) {
+        throw new Error("Invalid AGENTS.md strategy. Use one of: merge, separate, overwrite, cancel");
+      }
+      opts.agentsMdStrategy = value as AgentsMdStrategy;
+      opts.codexStrategy = value as CodexMergeStrategy;
+    }
     else if (arg === "--completion") {
       const shell = parseValue(argv, i++, "--completion");
       if (!["bash", "zsh", "fish"].includes(shell)) throw new Error("Unsupported shell. Use one of: bash, zsh, fish");
@@ -156,6 +189,90 @@ async function writeSafe(file: string, content: string, agent: AgentTarget, opts
   return { agent, status: "overwritten", file };
 }
 
+function separateAgentsMdTarget(agent: AgentTarget): AgentTarget {
+  return {
+    id: agent.id,
+    name: agent.name,
+    file: noyapSeparateFile,
+    template: agent.template,
+    writeMode: "replace",
+    notes: `Separate Noyap ${agent.name} rules`
+  } as AgentTarget;
+}
+
+function agentsMdConflictResults(agent: AgentTarget, warnings: { file: string; message: string }[]): WriteResult[] {
+  return warnings.map((warning) => ({
+    agent,
+    status: "warning" as const,
+    file: warning.file,
+    message: warning.message
+  }));
+}
+
+async function writeAgentsMdRules(content: string, agent: AgentTarget, opts: InitOptions): Promise<WriteResult[]> {
+  const fullPath = path.join(opts.cwd, agent.file);
+  const exists = existsSync(fullPath);
+  const chain = await findAgentsMdChain(opts.cwd);
+  const warnings = detectAgentsMdConflicts(chain, opts.config);
+  const results: WriteResult[] = [...agentsMdConflictResults(agent, warnings)];
+  const strategy = opts.force ? "overwrite" : opts.agentsMdStrategy;
+  const separateTarget = separateAgentsMdTarget(agent);
+
+  if (!exists) {
+    if (strategy === "separate") {
+      if (!opts.dryRun) {
+        await writeTextFile(opts.cwd, noyapSeparateFile, content);
+        await writeTextFile(opts.cwd, agent.file, referenceSeparateAgentsMd(""));
+      }
+      return [
+        ...results,
+        { agent: separateTarget, status: "created", file: noyapSeparateFile },
+        { agent, status: "created", file: agent.file }
+      ];
+    }
+    if (strategy === "cancel") return [...results, { agent, status: "skipped", file: agent.file, message: "cancelled" }];
+    if (!opts.dryRun) await writeTextFile(opts.cwd, agent.file, content);
+    return [...results, { agent, status: "created", file: agent.file }];
+  }
+
+  const current = await readFile(fullPath, "utf8");
+  if (current.includes(sentinel)) return [...results, { agent, status: "unchanged", file: agent.file }];
+
+  if (strategy === "cancel") {
+    return [...results, { agent, status: "skipped", file: agent.file, message: "cancelled" }];
+  }
+
+  if (strategy === "separate") {
+    const separatePath = path.join(opts.cwd, noyapSeparateFile);
+    const separateExists = existsSync(separatePath);
+    const referenceContent = referenceSeparateAgentsMd(current);
+    if (!opts.dryRun) {
+      if (!separateExists) await writeTextFile(opts.cwd, noyapSeparateFile, content);
+      if (!current.includes(noyapReferenceSentinel) && !current.includes(noyapSeparateFile)) {
+        await writeTextFile(opts.cwd, agent.file, referenceContent);
+      }
+    }
+    return [
+      ...results,
+      { agent: separateTarget, status: separateExists ? "unchanged" : "created", file: noyapSeparateFile },
+      {
+        agent,
+        status: current.includes(noyapReferenceSentinel) || current.includes(noyapSeparateFile) ? "unchanged" : "referenced",
+        file: agent.file
+      }
+    ];
+  }
+
+  if (strategy === "overwrite") {
+    if (!opts.dryRun) await writeTextFile(opts.cwd, agent.file, content);
+    return [...results, { agent, status: "overwritten", file: agent.file }];
+  }
+
+  const merged = mergeAgentsMd(current, content);
+  if (!opts.dryRun) await writeTextFile(opts.cwd, agent.file, merged);
+  return [...results, { agent, status: "merged", file: agent.file }];
+}
+
 async function writeConfig(opts: InitOptions): Promise<WriteResult> {
   const agent = {
     id: "codex",
@@ -177,7 +294,8 @@ export async function init(opts: InitOptions): Promise<WriteResult[]> {
   for (const agent of targets) {
     const template = await loadTemplate(agent.template);
     const content = renderTemplate(template, agent, opts.config);
-    results.push(await writeSafe(agent.file, content, agent, opts));
+    if (agent.file === "AGENTS.md") results.push(...await writeAgentsMdRules(content, agent, opts));
+    else results.push(await writeSafe(agent.file, content, agent, opts));
   }
 
   return results;
@@ -191,20 +309,33 @@ export function formatSummary(results: WriteResult[], dryRun = false): string {
   const icon: Record<WriteResult["status"], string> = {
     created: "✔",
     appended: "✔",
+    merged: "✔",
+    referenced: "✔",
     overwritten: "✔",
     skipped: "⚠",
-    unchanged: "✔"
+    unchanged: "✔",
+    warning: "⚠"
   };
   const action: Record<WriteResult["status"], string> = {
     created: "Generated",
     appended: "Updated",
+    merged: "Merged",
+    referenced: "Referenced",
     overwritten: "Overwrote",
     skipped: "Skipped existing",
-    unchanged: "Already configured"
+    unchanged: "Already configured",
+    warning: "Conflict note"
   };
   const label = (result: WriteResult) =>
-    result.file === "noyap.config.json" ? "noyap.config.json" : `${result.agent.name} rule file`;
-  const lines = results.map((result) => `${icon[result.status]} ${action[result.status]} ${label(result)}`);
+    result.status === "warning"
+      ? result.file
+      : result.file === "noyap.config.json"
+        ? "noyap.config.json"
+        : `${result.agent.name} rule file`;
+  const lines = results.map((result) => {
+    const suffix = result.message ? ` - ${result.message}` : result.status === "warning" ? ` - ${result.file}` : "";
+    return `${icon[result.status]} ${action[result.status]} ${label(result)}${suffix}`;
+  });
   const counts = results.reduce<Record<string, number>>((acc, result) => {
     acc[result.status] = (acc[result.status] ?? 0) + 1;
     return acc;

@@ -4,6 +4,16 @@ All notable changes to Noyap will be documented here.
 
 This project follows semantic versioning.
 
+## 0.2.0 - OpenCode and safer AGENTS.md support
+
+- Add OpenCode as a first-class supported agent.
+- Add `templates/opencode.md`.
+- Add safe AGENTS.md merge, separate-file, overwrite, and cancel strategies.
+- Add `--agents-md-strategy` for Codex/OpenCode AGENTS.md handling.
+- Preserve existing project AGENTS.md rules and warn on obvious verbosity conflicts.
+- Add nested AGENTS.md chain detection for monorepo workflows.
+- Add tests for OpenCode generation, merge, separate-file setup, and AGENTS.md preservation.
+
 ## 0.1.0 - Initial public release
 
 - Add `noyap init` CLI.
