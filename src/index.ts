@@ -1,7 +1,14 @@
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import path from "node:path";
-import { agentAliases, agents, findAgent, type AgentTarget } from "./agents.js";
+import {
+  agentAliases,
+  agents,
+  detectAgents,
+  findAgent,
+  formatAgentsList,
+  type AgentTarget
+} from "./agents.js";
 import {
   detectAgentsMdConflicts,
   findAgentsMdChain,
@@ -27,6 +34,15 @@ import { loadTemplate, renderTemplate, sentinel } from "./templates.js";
 import { completionScript, formatHelp } from "./cli.js";
 export { doctor, formatDoctorResult, type DoctorCheck, type DoctorOptions, type DoctorResult } from "./doctor.js";
 export { getRolePresetGuidance, getSafetyRulesText, rolePresetGuidance, safetyRules } from "./presets.js";
+export {
+  agents,
+  detectAgents,
+  findAgent,
+  formatAgentsList,
+  validateAgentRegistry,
+  type AgentCategory,
+  type AgentTarget
+} from "./agents.js";
 export { commandDefinitions, commonExamples, completionMetadata, completionScript, optionDefinitions, quickStartExamples } from "./cli.js";
 export {
   detectAgentsMdConflicts,
@@ -49,10 +65,13 @@ export {
 } from "./language.js";
 
 export interface InitOptions {
-  command: "init" | "diff" | "update" | "remove" | "doctor" | "completion";
+  command: "init" | "diff" | "update" | "remove" | "doctor" | "agents" | "completion";
   cwd: string;
   agent?: string;
   all: boolean;
+  detected: boolean;
+  exclude: string[];
+  json: boolean;
   force: boolean;
   fix: boolean;
   dryRun: boolean;
@@ -92,6 +111,9 @@ export function parseArgs(argv: string[], cwd = process.cwd()): InitOptions & { 
     command: command && !command.startsWith("-") ? command : "init",
     cwd,
     all: false,
+    detected: false,
+    exclude: [],
+    json: false,
     force: false,
     fix: false,
     dryRun: false,
@@ -107,7 +129,7 @@ export function parseArgs(argv: string[], cwd = process.cwd()): InitOptions & { 
   if (command === "--version" || command === "-v") opts.version = true;
   if (
     command &&
-    !["init", "diff", "update", "remove", "doctor", "completion"].includes(command) &&
+    !["init", "diff", "update", "remove", "doctor", "agents", "completion"].includes(command) &&
     !command.startsWith("-")
   ) {
     throw new Error(`Unknown command: ${command}`);
@@ -117,6 +139,9 @@ export function parseArgs(argv: string[], cwd = process.cwd()): InitOptions & { 
     const arg = argv[i];
     if (arg === "--agent") opts.agent = parseValue(argv, i++, "--agent");
     else if (arg === "--all") opts.all = true;
+    else if (arg === "--detected") opts.detected = true;
+    else if (arg === "--exclude") opts.exclude = parseValue(argv, i++, "--exclude").split(",").map((item) => item.trim()).filter(Boolean);
+    else if (arg === "--json") opts.json = true;
     else if (arg === "--force" || arg === "-f") opts.force = true;
     else if (arg === "--fix") opts.fix = true;
     else if (arg === "--dry-run") opts.dryRun = true;
@@ -185,14 +210,17 @@ function configTarget(): AgentTarget {
   } as AgentTarget;
 }
 
-function selectedAgents(opts: InitOptions): AgentTarget[] {
-  if (opts.all) return agents;
+export function selectedAgents(opts: InitOptions): AgentTarget[] {
+  const excluded = new Set(opts.exclude.map((id) => findAgent(id)?.id ?? id));
+  const filterExcluded = (items: AgentTarget[]) => items.filter((agent) => !excluded.has(agent.id));
+  if (opts.all) return filterExcluded(agents);
+  if (opts.detected) return filterExcluded(detectAgents(opts.cwd));
   if (opts.agent) {
     const agent = findAgent(opts.agent);
     if (!agent) throw new Error(`Unknown agent: ${opts.agent}. Use one of: ${agents.map((a) => a.id).join(", ")}`);
-    return [agent];
+    return filterExcluded([agent]);
   }
-  return [findAgent("codex"), findAgent("claude"), findAgent("cursor")].filter(Boolean) as AgentTarget[];
+  return filterExcluded([findAgent("codex"), findAgent("claude"), findAgent("cursor")].filter(Boolean) as AgentTarget[]);
 }
 
 async function optionsWithExistingConfig(opts: InitOptions): Promise<InitOptions> {
@@ -530,10 +558,14 @@ export async function diff(opts: InitOptions): Promise<string> {
 }
 
 export async function doctorFix(opts: InitOptions): Promise<WriteResult[]> {
-  const result = await doctor({ cwd: opts.cwd, agent: opts.agent, all: opts.all });
+  const result = await doctor({ cwd: opts.cwd, agent: opts.agent, all: opts.all, detected: opts.detected, exclude: opts.exclude });
   if (result.ok) return [];
   const effectiveOpts = await optionsWithExistingConfig(opts);
   return init({ ...effectiveOpts, command: "init", dryRun: false });
+}
+
+export function agentsList(opts: InitOptions): string {
+  return formatAgentsList(opts.detected ? detectAgents(opts.cwd) : opts.all ? agents : agents, opts.json);
 }
 
 export function helpText(): string {

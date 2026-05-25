@@ -6,6 +6,8 @@ import path from "node:path";
 import test from "node:test";
 import {
   completionScript,
+  agents,
+  agentsList,
   detectAgentsMdConflicts,
   diff,
   doctor,
@@ -14,7 +16,8 @@ import {
   init,
   parseArgs,
   remove,
-  update
+  update,
+  validateAgentRegistry
 } from "../dist/index.js";
 
 async function tempDir() {
@@ -56,7 +59,24 @@ test("parseArgs supports lifecycle commands", () => {
   assert.equal(parseArgs(["update", "--agent", "cursor"]).command, "update");
   assert.equal(parseArgs(["remove", "--agent", "cursor"]).command, "remove");
   assert.equal(parseArgs(["doctor", "--fix"]).fix, true);
+  assert.equal(parseArgs(["agents", "--json"]).json, true);
+  assert.deepEqual(parseArgs(["init", "--all", "--exclude", "devin,void"]).exclude, ["devin", "void"]);
+  assert.equal(parseArgs(["init", "--detected"]).detected, true);
   assert.equal(parseArgs(["completion"]).command, "completion");
+});
+
+test("agent registry is valid and templates exist", async () => {
+  assert.deepEqual(validateAgentRegistry(), []);
+  assert.equal(agents.length >= 19, true);
+
+  const ids = new Set(agents.map((agent) => agent.id));
+  for (const id of ["aider", "junie", "kiro", "zed", "kilo", "tabnine", "amazonq", "devin", "void"]) {
+    assert.equal(ids.has(id), true, `${id} should be registered`);
+  }
+
+  for (const agent of agents) {
+    assert.equal(existsSync(path.join(process.cwd(), "templates", agent.template)), true, `${agent.id} template missing`);
+  }
 });
 
 test("parseArgs supports role presets", () => {
@@ -207,10 +227,51 @@ test("completionScript supports shell completion command output", () => {
   const zsh = completionScript("zsh");
   const fish = completionScript("fish");
 
-  assert.match(zsh, /diff update remove doctor completion/);
+  assert.match(zsh, /diff update remove doctor agents completion/);
   assert.match(zsh, /--fix/);
+  assert.match(zsh, /--detected/);
+  assert.match(zsh, /aider/);
   assert.match(fish, /complete -c noyap -l fix/);
   assert.throws(() => completionScript("powershell"), /Unsupported shell/);
+});
+
+test("agentsList supports text, json, and detected agents", async () => {
+  const cwd = await tempDir();
+  try {
+    await mkdir(path.join(cwd, ".junie"), { recursive: true });
+    await writeFile(path.join(cwd, ".junie/AGENTS.md"), "# Existing\n", "utf8");
+
+    const text = agentsList(parseArgs(["agents"], cwd));
+    const json = JSON.parse(agentsList(parseArgs(["agents", "--json"], cwd)));
+    const detected = agentsList(parseArgs(["agents", "--detected"], cwd));
+
+    assert.match(text, /Amazon Q Developer/);
+    assert.equal(json.some((agent) => agent.id === "junie"), true);
+    assert.match(detected, /junie/);
+    assert.doesNotMatch(detected, /tabnine/);
+  } finally {
+    await rm(cwd, { recursive: true, force: true });
+  }
+});
+
+test("init supports new agents and exclude selection", async () => {
+  const cwd = await tempDir();
+  try {
+    await init(parseArgs(["init", "--agent", "junie"], cwd));
+    await init(parseArgs(["init", "--agent", "kiro"], cwd));
+    await init(parseArgs(["init", "--agent", "amazonq"], cwd));
+    await init(parseArgs(["init", "--agent", "aider"], cwd));
+
+    assert.match(await readFile(path.join(cwd, ".junie/AGENTS.md"), "utf8"), /Noyap For JetBrains Junie/);
+    assert.match(await readFile(path.join(cwd, ".kiro/steering/noyap.md"), "utf8"), /inclusion: always/);
+    assert.match(await readFile(path.join(cwd, ".amazonq/rules/noyap.md"), "utf8"), /Noyap For Amazon Q Developer/);
+    assert.match(await readFile(path.join(cwd, "CONVENTIONS.md"), "utf8"), /Noyap For Aider/);
+
+    const results = await init(parseArgs(["init", "--all", "--exclude", "junie,kiro,amazonq,aider"], cwd));
+    assert.equal(results.some((result) => ["junie", "kiro", "amazonq", "aider"].includes(result.agent.id)), false);
+  } finally {
+    await rm(cwd, { recursive: true, force: true });
+  }
 });
 
 test("replace-mode files are not overwritten without force", async () => {

@@ -4,6 +4,14 @@ All notable changes to Noyap will be documented here.
 
 This project follows semantic versioning.
 
+## Unreleased
+
+- Expand the agent registry with Aider, JetBrains Junie, Amazon Kiro, Zed AI, Kilo Code, Tabnine Agent, Amazon Q Developer, Devin, and Void.
+- Add richer agent metadata with aliases, categories, docs links, and detection paths.
+- Add `noyap agents` with text and JSON output.
+- Add `--detected` and `--exclude <ids>` for agent selection.
+- Add registry validation and coverage for new agent templates.
+
 ## 0.2.1 - Lifecycle CLI commands
 
 - Add `noyap diff` to preview generated config and rule file changes.

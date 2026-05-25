@@ -1,7 +1,7 @@
 import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
-import { agents, findAgent, type AgentTarget } from "./agents.js";
+import { agents, detectAgents, findAgent, type AgentTarget } from "./agents.js";
 import { languages, modes, normalizeConfig, rolePresets, thaiTechnicalTermModes, type NoyapConfig } from "./config.js";
 import { sentinel } from "./templates.js";
 import { noyapReferenceSentinel, noyapSeparateFile } from "./agents-md.js";
@@ -10,6 +10,8 @@ export interface DoctorOptions {
   cwd: string;
   agent?: string;
   all: boolean;
+  detected?: boolean;
+  exclude?: string[];
 }
 
 export interface DoctorCheck {
@@ -29,13 +31,16 @@ export interface DoctorResult {
 }
 
 function targets(opts: DoctorOptions): AgentTarget[] {
-  if (opts.all) return agents;
+  const excluded = new Set((opts.exclude ?? []).map((id) => findAgent(id)?.id ?? id));
+  const filterExcluded = (items: AgentTarget[]) => items.filter((agent) => !excluded.has(agent.id));
+  if (opts.all) return filterExcluded(agents);
+  if (opts.detected) return filterExcluded(detectAgents(opts.cwd));
   if (opts.agent) {
     const agent = findAgent(opts.agent);
     if (!agent) throw new Error(`Unknown agent: ${opts.agent}. Use one of: ${agents.map((item) => item.id).join(", ")}`);
-    return [agent];
+    return filterExcluded([agent]);
   }
-  return [findAgent("codex"), findAgent("claude"), findAgent("cursor")].filter(Boolean) as AgentTarget[];
+  return filterExcluded([findAgent("codex"), findAgent("claude"), findAgent("cursor")].filter(Boolean) as AgentTarget[]);
 }
 
 function validateConfigShape(raw: Partial<NoyapConfig>): string[] {

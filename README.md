@@ -6,7 +6,7 @@ AI coding-agent replies with less filler and more signal.
 [![MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Thai supported](https://img.shields.io/badge/Thai-supported-16a34a)](README.th.md)
 
-Noyap installs communication rules for Claude Code, Codex, OpenCode, Cursor, Windsurf, Copilot, Cline, Continue, Gemini CLI, and Roo Code.
+Noyap installs communication rules for Claude Code, Codex, OpenCode, Cursor, Windsurf, Copilot, Cline, Continue, Gemini CLI, Roo Code, Aider, Junie, Kiro, Zed, Kilo Code, Tabnine, Amazon Q Developer, Devin, and Void.
 
 It keeps answers short, code-first, and practical while preserving technical meaning, warnings, and natural language style.
 
@@ -97,6 +97,15 @@ Noyap is not "translate and shorten." Thai output should sound like Thai develop
 | Continue                 | `.continue/rules/noyap.md`        | Create project rule   |
 | Gemini CLI               | `GEMINI.md`                       | Append Noyap section  |
 | Roo Code                 | `.roo/rules/noyap.md`             | Create project rule   |
+| Aider                    | `CONVENTIONS.md`                  | Append convention rules |
+| JetBrains Junie          | `.junie/AGENTS.md`                | Append project guidelines |
+| Amazon Kiro              | `.kiro/steering/noyap.md`         | Create steering file |
+| Zed AI                   | `.rules`                          | Append project rules |
+| Kilo Code                | `.kilocode/rules/noyap.md`        | Create project rule |
+| Tabnine Agent            | `.tabnine/guidelines/noyap.md`    | Create guideline file |
+| Amazon Q Developer       | `.amazonq/rules/noyap.md`         | Create project rule |
+| Devin                    | `.devin/AGENTS.md`                | Append scoped instructions |
+| Void                     | `.voidrules`                      | Append project rules |
 
 ## Installation
 
@@ -110,6 +119,19 @@ Install for every supported agent:
 
 ```bash
 npx @ppwnr88/noyap init --all
+```
+
+Install only agents detected from existing repo files:
+
+```bash
+npx @ppwnr88/noyap init --detected
+```
+
+List supported agents:
+
+```bash
+npx @ppwnr88/noyap agents
+npx @ppwnr88/noyap agents --json
 ```
 
 Global install keeps the CLI command as `noyap`:

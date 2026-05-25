@@ -6,7 +6,7 @@
 [![MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![English README](https://img.shields.io/badge/README-English-2563eb)](README.md)
 
-Noyap ติดตั้ง rule/instruction ให้ AI coding agent หลายตัว เช่น Claude Code, Codex, OpenCode, Cursor, Windsurf, Copilot, Cline, Continue, Gemini CLI และ Roo Code
+Noyap ติดตั้ง rule/instruction ให้ AI coding agent หลายตัว เช่น Claude Code, Codex, OpenCode, Cursor, Windsurf, Copilot, Cline, Continue, Gemini CLI, Roo Code, Aider, Junie, Kiro, Zed, Kilo Code, Tabnine, Amazon Q Developer, Devin และ Void
 
 เป้าหมายง่ายๆ:
 
@@ -96,6 +96,15 @@ Noyap ช่วยบอก agent ให้:
 | Continue                 | `.continue/rules/noyap.md`        | project rule                |
 | Gemini CLI               | `GEMINI.md`                       | append project instructions |
 | Roo Code                 | `.roo/rules/noyap.md`             | project rule                |
+| Aider                    | `CONVENTIONS.md`                  | append convention rules     |
+| JetBrains Junie          | `.junie/AGENTS.md`                | append project guidelines   |
+| Amazon Kiro              | `.kiro/steering/noyap.md`         | steering file               |
+| Zed AI                   | `.rules`                          | append project rules        |
+| Kilo Code                | `.kilocode/rules/noyap.md`        | project rule                |
+| Tabnine Agent            | `.tabnine/guidelines/noyap.md`    | guideline file              |
+| Amazon Q Developer       | `.amazonq/rules/noyap.md`         | project rule                |
+| Devin                    | `.devin/AGENTS.md`                | scoped instructions         |
+| Void                     | `.voidrules`                      | append project rules        |
 
 ## ติดตั้ง
 
@@ -109,6 +118,19 @@ npx @ppwnr88/noyap init
 
 ```bash
 npx @ppwnr88/noyap init --all
+```
+
+ติดตั้งเฉพาะ agent ที่ detect ได้จากไฟล์ใน repo:
+
+```bash
+npx @ppwnr88/noyap init --detected
+```
+
+ดู agent ที่รองรับ:
+
+```bash
+npx @ppwnr88/noyap agents
+npx @ppwnr88/noyap agents --json
 ```
 
 ถ้าติดตั้งแบบ global คำสั่ง CLI ยังเป็น `noyap`:

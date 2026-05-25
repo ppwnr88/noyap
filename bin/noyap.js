@@ -5,6 +5,8 @@ import readline from "node:readline/promises";
 import { fileURLToPath } from "node:url";
 import {
   completionMetadata,
+  agents,
+  agentsList,
   diff,
   doctor,
   doctorFix,
@@ -73,16 +75,7 @@ async function interactiveInitArgs() {
       [
         { label: "Default: Codex + Claude + Cursor", value: "default" },
         { label: "All supported agents", value: "all" },
-        { label: "Claude Code", value: "claude" },
-        { label: "OpenAI Codex / Codex CLI", value: "codex" },
-        { label: "OpenCode", value: "opencode" },
-        { label: "Cursor", value: "cursor" },
-        { label: "Windsurf", value: "windsurf" },
-        { label: "GitHub Copilot", value: "copilot" },
-        { label: "Cline", value: "cline" },
-        { label: "Continue", value: "continue" },
-        { label: "Gemini CLI", value: "gemini" },
-        { label: "Roo Code", value: "roo" }
+        ...agents.map((item) => ({ label: item.name, value: item.id }))
       ],
       "1"
     );
@@ -217,6 +210,9 @@ _noyap() {
     '--agents-md-strategy[AGENTS.md strategy]:agents-md-strategy:(${agentsMdStrategies})' \\
     '--codex-strategy[Alias for --agents-md-strategy]:codex-strategy:(${agentsMdStrategies})' \\
     '--all[All supported agents]' \\
+    '--detected[Detected agents]' \\
+    '--exclude[Skip agent ids]:exclude:' \\
+    '--json[JSON output]' \\
     '--interactive[Guided init flow]' \\
     '--dry-run[Preview only]' \\
     '--fix[Fix doctor issues]' \\
@@ -231,7 +227,7 @@ _noyap
   if (shell === "bash") {
     return `_noyap_complete() {
   local cur="\${COMP_WORDS[COMP_CWORD]}"
-  local words="${commands} --agent --mode --lang --preset --agents-md-strategy --codex-strategy --all --interactive --dry-run --fix --force --help --version"
+  local words="${commands} --agent --mode --lang --preset --agents-md-strategy --codex-strategy --all --detected --exclude --json --interactive --dry-run --fix --force --help --version"
   COMPREPLY=( $(compgen -W "$words" -- "$cur") )
 }
 complete -F _noyap_complete noyap
@@ -249,6 +245,9 @@ complete -F _noyap_complete noyap
       `complete -c noyap -l agents-md-strategy -a '${agentsMdStrategies}'`,
       `complete -c noyap -l codex-strategy -a '${agentsMdStrategies}'`,
       "complete -c noyap -l all",
+      "complete -c noyap -l detected",
+      "complete -c noyap -l exclude",
+      "complete -c noyap -l json",
       "complete -c noyap -l interactive",
       "complete -c noyap -l dry-run",
       "complete -c noyap -l fix",
@@ -300,7 +299,7 @@ async function main() {
   }
 
   if (args[0] === "doctor") {
-    const result = await doctor({ cwd: opts.cwd, agent: opts.agent, all: opts.all });
+    const result = await doctor({ cwd: opts.cwd, agent: opts.agent, all: opts.all, detected: opts.detected, exclude: opts.exclude });
     console.log(colorizeSummary(formatDoctorResult(result)));
     if (!result.ok && opts.fix) {
       console.log("");
@@ -313,6 +312,11 @@ async function main() {
 
   if (args[0] === "diff") {
     console.log(await diff(opts));
+    return;
+  }
+
+  if (args[0] === "agents") {
+    console.log(agentsList(opts));
     return;
   }
 

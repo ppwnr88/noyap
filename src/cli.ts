@@ -23,6 +23,10 @@ export const commandDefinitions = [
     summary: "Verify config and generated rule files"
   },
   {
+    name: "agents",
+    summary: "List supported or detected agents"
+  },
+  {
     name: "completion",
     summary: "Print shell completion for bash, zsh, or fish"
   }
@@ -31,6 +35,9 @@ export const commandDefinitions = [
 export const optionDefinitions = [
   { flag: "--agent <id>", summary: `Target one agent: ${agents.map((agent) => agent.id).join(", ")}` },
   { flag: "--all", summary: "Generate or verify every supported agent" },
+  { flag: "--detected", summary: "Target agents detected from existing repo files" },
+  { flag: "--exclude <ids>", summary: "Comma-separated agent ids to skip with --all or --detected" },
+  { flag: "--json", summary: "Print machine-readable output where supported" },
   { flag: "--interactive", summary: "Run guided init flow" },
   { flag: "--completion <shell>", summary: "Alias for completion bash | zsh | fish" },
   { flag: "--lang <value>", summary: languages.join(" | ") },
@@ -55,6 +62,7 @@ export const quickStartExamples = [
   "npx @ppwnr88/noyap init --interactive",
   "npx @ppwnr88/noyap init --all --mode balanced",
   "npx @ppwnr88/noyap init --lang th --mode thai-dev",
+  "npx @ppwnr88/noyap agents",
   "npx @ppwnr88/noyap diff --all",
   "npx @ppwnr88/noyap doctor"
 ] as const;
@@ -67,6 +75,9 @@ export const commonExamples = [
   "npx @ppwnr88/noyap init --mode thai-dev",
   "npx @ppwnr88/noyap init --preset backend",
   "npx @ppwnr88/noyap init --all --dry-run",
+  "npx @ppwnr88/noyap init --detected",
+  "npx @ppwnr88/noyap init --all --exclude devin,void",
+  "npx @ppwnr88/noyap agents --detected",
   "npx @ppwnr88/noyap diff --agent cursor",
   "npx @ppwnr88/noyap update --all",
   "npx @ppwnr88/noyap remove --agent cursor",
@@ -111,6 +122,9 @@ _noyap() {
     '--agents-md-strategy[AGENTS.md strategy]:agents-md-strategy:(${agentsMdStrategies})' \\
     '--codex-strategy[Alias for --agents-md-strategy]:codex-strategy:(${agentsMdStrategies})' \\
     '--all[All supported agents]' \\
+    '--detected[Detected agents]' \\
+    '--exclude[Skip agent ids]:exclude:' \\
+    '--json[JSON output]' \\
     '--interactive[Guided init flow]' \\
     '--dry-run[Preview only]' \\
     '--fix[Fix doctor issues]' \\
@@ -125,7 +139,7 @@ _noyap
   if (shell === "bash") {
     return `_noyap_complete() {
   local cur="\${COMP_WORDS[COMP_CWORD]}"
-  local words="${commands} --agent --mode --lang --preset --agents-md-strategy --codex-strategy --all --interactive --dry-run --fix --force --help --version"
+  local words="${commands} --agent --mode --lang --preset --agents-md-strategy --codex-strategy --all --detected --exclude --json --interactive --dry-run --fix --force --help --version"
   COMPREPLY=( $(compgen -W "$words" -- "$cur") )
 }
 complete -F _noyap_complete noyap
@@ -143,6 +157,9 @@ complete -F _noyap_complete noyap
       `complete -c noyap -l agents-md-strategy -a '${agentsMdStrategies}'`,
       `complete -c noyap -l codex-strategy -a '${agentsMdStrategies}'`,
       "complete -c noyap -l all",
+      "complete -c noyap -l detected",
+      "complete -c noyap -l exclude",
+      "complete -c noyap -l json",
       "complete -c noyap -l interactive",
       "complete -c noyap -l dry-run",
       "complete -c noyap -l fix",
