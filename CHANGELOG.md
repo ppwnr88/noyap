@@ -4,7 +4,7 @@ All notable changes to Noyap will be documented here.
 
 This project follows semantic versioning.
 
-## Unreleased
+## 0.2.1 - Lifecycle CLI commands
 
 - Add `noyap diff` to preview generated config and rule file changes.
 - Add `noyap update` to refresh existing Noyap-managed files.

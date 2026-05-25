@@ -1,6 +1,6 @@
 {
   "name": "@ppwnr88/noyap",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "AI coding-agent communication optimizer with Thai-native and multilingual support.",
   "license": "MIT",
   "type": "module",
