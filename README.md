@@ -135,12 +135,39 @@ Preview without writing:
 
 ```bash
 npx @ppwnr88/noyap init --all --dry-run
+npx @ppwnr88/noyap diff --all
 ```
 
 Overwrite existing replace-mode rule files:
 
 ```bash
 npx @ppwnr88/noyap init --agent cursor --force
+```
+
+Refresh existing Noyap files:
+
+```bash
+npx @ppwnr88/noyap update --all
+```
+
+Remove generated Noyap rules:
+
+```bash
+npx @ppwnr88/noyap remove --all
+```
+
+Fix missing config or rule files found by doctor:
+
+```bash
+npx @ppwnr88/noyap doctor --all --fix
+```
+
+Shell completion:
+
+```bash
+npx @ppwnr88/noyap completion zsh
+npx @ppwnr88/noyap completion bash
+npx @ppwnr88/noyap completion fish
 ```
 
 ## Existing AGENTS.md

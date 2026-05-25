@@ -140,12 +140,39 @@ npx @ppwnr88/noyap init --all --lang th --mode thai-dev
 
 ```bash
 npx @ppwnr88/noyap init --all --dry-run
+npx @ppwnr88/noyap diff --all
 ```
 
 ถ้าไฟล์ rule มีอยู่แล้วและอยากเขียนทับ:
 
 ```bash
 npx @ppwnr88/noyap init --agent cursor --force
+```
+
+อัปเดต rule ที่เคยติดตั้งแล้ว:
+
+```bash
+npx @ppwnr88/noyap update --all
+```
+
+ถอน rule ของ Noyap ออกจากโปรเจกต์:
+
+```bash
+npx @ppwnr88/noyap remove --all
+```
+
+ให้ doctor แก้ไฟล์ที่หายแบบง่ายๆ:
+
+```bash
+npx @ppwnr88/noyap doctor --all --fix
+```
+
+Shell completion:
+
+```bash
+npx @ppwnr88/noyap completion zsh
+npx @ppwnr88/noyap completion bash
+npx @ppwnr88/noyap completion fish
 ```
 
 CLI ปลอดภัยโดย default:

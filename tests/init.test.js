@@ -4,7 +4,18 @@ import { existsSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import test from "node:test";
-import { detectAgentsMdConflicts, doctor, findAgentsMdChain, init, parseArgs } from "../dist/index.js";
+import {
+  completionScript,
+  detectAgentsMdConflicts,
+  diff,
+  doctor,
+  doctorFix,
+  findAgentsMdChain,
+  init,
+  parseArgs,
+  remove,
+  update
+} from "../dist/index.js";
 
 async function tempDir() {
   return mkdtemp(path.join(os.tmpdir(), "noyap-"));
@@ -38,6 +49,14 @@ test("parseArgs supports requested init flags", () => {
   assert.equal(opts.config.preserveMixedLanguage, true);
   assert.equal(opts.config.naturalThaiMode, true);
   assert.equal(opts.cwd, "/tmp/project");
+});
+
+test("parseArgs supports lifecycle commands", () => {
+  assert.equal(parseArgs(["diff", "--all"]).command, "diff");
+  assert.equal(parseArgs(["update", "--agent", "cursor"]).command, "update");
+  assert.equal(parseArgs(["remove", "--agent", "cursor"]).command, "remove");
+  assert.equal(parseArgs(["doctor", "--fix"]).fix, true);
+  assert.equal(parseArgs(["completion"]).command, "completion");
 });
 
 test("parseArgs supports role presets", () => {
@@ -103,6 +122,95 @@ test("doctor fails on missing expected agent rule", async () => {
   } finally {
     await rm(cwd, { recursive: true, force: true });
   }
+});
+
+test("diff previews generated file changes", async () => {
+  const cwd = await tempDir();
+  try {
+    const output = await diff(parseArgs(["diff", "--agent", "cursor"], cwd));
+
+    assert.match(output, /--- a\/noyap\.config\.json/);
+    assert.match(output, /\+\+\+ b\/\.cursor\/rules\/noyap\.mdc/);
+    assert.match(output, /\+Less yap\. More code\./);
+    assert.equal(existsSync(path.join(cwd, "noyap.config.json")), false);
+  } finally {
+    await rm(cwd, { recursive: true, force: true });
+  }
+});
+
+test("update refreshes existing Noyap rule files", async () => {
+  const cwd = await tempDir();
+  try {
+    await init(parseArgs(["init", "--agent", "cursor"], cwd));
+    const rulePath = path.join(cwd, ".cursor/rules/noyap.mdc");
+    const current = await readFile(rulePath, "utf8");
+    await writeFile(rulePath, current.replace("mode=balanced", "mode=minimal"), "utf8");
+
+    const results = await update(parseArgs(["update", "--agent", "cursor", "--mode", "senior"], cwd));
+    const refreshed = await readFile(rulePath, "utf8");
+
+    assert.equal(results.some((result) => result.file.endsWith("noyap.mdc") && result.status === "updated"), true);
+    assert.match(refreshed, /mode=senior/);
+  } finally {
+    await rm(cwd, { recursive: true, force: true });
+  }
+});
+
+test("update preserves existing config when no config flags are provided", async () => {
+  const cwd = await tempDir();
+  try {
+    await init(parseArgs(["init", "--agent", "cursor", "--mode", "thai-dev"], cwd));
+
+    const results = await update(parseArgs(["update", "--agent", "cursor"], cwd));
+    const config = JSON.parse(await readFile(path.join(cwd, "noyap.config.json"), "utf8"));
+    const rule = await readFile(path.join(cwd, ".cursor/rules/noyap.mdc"), "utf8");
+
+    assert.equal(results.some((result) => result.file === "noyap.config.json" && result.status === "unchanged"), true);
+    assert.equal(config.mode, "thai-dev");
+    assert.match(rule, /mode=thai-dev/);
+  } finally {
+    await rm(cwd, { recursive: true, force: true });
+  }
+});
+
+test("remove deletes replace-mode rules and removes append sections", async () => {
+  const cwd = await tempDir();
+  try {
+    await init(parseArgs(["init", "--agent", "cursor"], cwd));
+    await init(parseArgs(["init", "--agent", "claude"], cwd));
+
+    const results = await remove(parseArgs(["remove", "--all"], cwd));
+    const claude = await readFile(path.join(cwd, "CLAUDE.md"), "utf8");
+
+    assert.equal(results.some((result) => result.file === "noyap.config.json" && result.status === "removed"), true);
+    assert.equal(existsSync(path.join(cwd, ".cursor/rules/noyap.mdc")), false);
+    assert.doesNotMatch(claude, /noyap:rules/);
+  } finally {
+    await rm(cwd, { recursive: true, force: true });
+  }
+});
+
+test("doctorFix creates missing selected Noyap files", async () => {
+  const cwd = await tempDir();
+  try {
+    const results = await doctorFix(parseArgs(["doctor", "--agent", "cursor", "--fix"], cwd));
+    const result = await doctor({ cwd, agent: "cursor", all: false });
+
+    assert.equal(results.some((item) => item.status === "created"), true);
+    assert.equal(result.ok, true);
+  } finally {
+    await rm(cwd, { recursive: true, force: true });
+  }
+});
+
+test("completionScript supports shell completion command output", () => {
+  const zsh = completionScript("zsh");
+  const fish = completionScript("fish");
+
+  assert.match(zsh, /diff update remove doctor completion/);
+  assert.match(zsh, /--fix/);
+  assert.match(fish, /complete -c noyap -l fix/);
+  assert.throws(() => completionScript("powershell"), /Unsupported shell/);
 });
 
 test("replace-mode files are not overwritten without force", async () => {

@@ -3,7 +3,19 @@ import { existsSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import readline from "node:readline/promises";
 import { fileURLToPath } from "node:url";
-import { completionMetadata, doctor, formatDoctorResult, formatSummary, helpText, init, parseArgs } from "../dist/index.js";
+import {
+  completionMetadata,
+  diff,
+  doctor,
+  doctorFix,
+  formatDoctorResult,
+  formatSummary,
+  helpText,
+  init,
+  parseArgs,
+  remove,
+  update
+} from "../dist/index.js";
 
 const useColor = process.stdout.isTTY && !process.env.NO_COLOR;
 const color = {
@@ -202,11 +214,12 @@ _noyap() {
     '--mode[Verbosity mode]:mode:(${modes})' \\
     '--lang[Language mode]:language:(${languages})' \\
     '--preset[Role preset]:preset:(${presets})' \\
-    '--agents-md-strategy[AGENTS.md strategy]:agents-md-strategy:(${agents_md_strategies})' \\
-    '--codex-strategy[Alias for --agents-md-strategy]:codex-strategy:(${agents_md_strategies})' \\
+    '--agents-md-strategy[AGENTS.md strategy]:agents-md-strategy:(${agentsMdStrategies})' \\
+    '--codex-strategy[Alias for --agents-md-strategy]:codex-strategy:(${agentsMdStrategies})' \\
     '--all[All supported agents]' \\
     '--interactive[Guided init flow]' \\
     '--dry-run[Preview only]' \\
+    '--fix[Fix doctor issues]' \\
     '--force[Overwrite replace-mode files]' \\
     '--help[Show help]' \\
     '--version[Show version]'
@@ -218,7 +231,7 @@ _noyap
   if (shell === "bash") {
     return `_noyap_complete() {
   local cur="\${COMP_WORDS[COMP_CWORD]}"
-  local words="${commands} --agent --mode --lang --preset --agents-md-strategy --codex-strategy --all --interactive --dry-run --force --help --version"
+  local words="${commands} --agent --mode --lang --preset --agents-md-strategy --codex-strategy --all --interactive --dry-run --fix --force --help --version"
   COMPREPLY=( $(compgen -W "$words" -- "$cur") )
 }
 complete -F _noyap_complete noyap
@@ -238,6 +251,7 @@ complete -F _noyap_complete noyap
       "complete -c noyap -l all",
       "complete -c noyap -l interactive",
       "complete -c noyap -l dry-run",
+      "complete -c noyap -l fix",
       "complete -c noyap -l force"
     ].join("\n") + "\n";
   }
@@ -252,6 +266,11 @@ async function main() {
   if (completionIndex !== -1) {
     const shell = rawArgs[completionIndex + 1];
     console.log(completionScript(shell));
+    return;
+  }
+
+  if (rawArgs[0] === "completion") {
+    console.log(completionScript(rawArgs[1]));
     return;
   }
 
@@ -283,12 +302,28 @@ async function main() {
   if (args[0] === "doctor") {
     const result = await doctor({ cwd: opts.cwd, agent: opts.agent, all: opts.all });
     console.log(colorizeSummary(formatDoctorResult(result)));
-    if (!result.ok) process.exitCode = 1;
+    if (!result.ok && opts.fix) {
+      console.log("");
+      console.log(colorizeSummary(formatSummary(await doctorFix(opts), false, "Noyap doctor --fix")));
+    } else if (!result.ok) {
+      process.exitCode = 1;
+    }
     return;
   }
 
-  const results = await init(opts);
-  console.log(colorizeSummary(formatSummary(results, opts.dryRun)));
+  if (args[0] === "diff") {
+    console.log(await diff(opts));
+    return;
+  }
+
+  const results =
+    args[0] === "update"
+      ? await update(opts)
+      : args[0] === "remove"
+        ? await remove(opts)
+        : await init(opts);
+  const title = args[0] === "update" ? "Noyap update" : args[0] === "remove" ? "Noyap remove" : "Noyap init";
+  console.log(colorizeSummary(formatSummary(results, opts.dryRun, title)));
 }
 
 main().catch((error) => {

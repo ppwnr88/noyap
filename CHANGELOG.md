@@ -4,6 +4,14 @@ All notable changes to Noyap will be documented here.
 
 This project follows semantic versioning.
 
+## Unreleased
+
+- Add `noyap diff` to preview generated config and rule file changes.
+- Add `noyap update` to refresh existing Noyap-managed files.
+- Add `noyap remove` to remove generated Noyap config and rule sections.
+- Add `noyap completion <bash|zsh|fish>` as the primary shell completion command.
+- Add `noyap doctor --fix` to create missing config and selected rule files.
+
 ## 0.2.0 - OpenCode and safer AGENTS.md support
 
 - Add OpenCode as a first-class supported agent.
