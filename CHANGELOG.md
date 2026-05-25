@@ -4,7 +4,7 @@ All notable changes to Noyap will be documented here.
 
 This project follows semantic versioning.
 
-## Unreleased
+## 0.3.0 - Expanded agent registry
 
 - Expand the agent registry with Aider, JetBrains Junie, Amazon Kiro, Zed AI, Kilo Code, Tabnine Agent, Amazon Q Developer, Devin, and Void.
 - Add richer agent metadata with aliases, categories, docs links, and detection paths.
